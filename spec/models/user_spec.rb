@@ -1,7 +1,22 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id            :integer          not null, primary key
+#  email         :string
+#  uid           :string
+#  name          :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  session_token :string
+#  nickname      :string
+#
+
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
   it { should validate_presence_of(:nickname) }
+  it { should have_many(:authored_tracks) }
 
   it 'should set the session_token before validation' do
     user = User.new

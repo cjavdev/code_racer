@@ -7,7 +7,3 @@ window.CodeRacer = {
     alert('Hello from Backbone!');
   }
 };
-
-$(document).ready(function(){
-  CodeRacer.initialize();
-});
