@@ -10,6 +10,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'figaro'
+gem 'backbone-on-rails'
 
 group :development do
   gem 'better_errors'
