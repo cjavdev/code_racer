@@ -12,6 +12,8 @@ gem 'omniauth-github'
 gem 'figaro'
 gem 'backbone-on-rails'
 gem 'newrelic_rpm'
+gem 'bootstrap-sass'
+gem 'bootswatch-rails'
 
 group :development do
   gem 'better_errors'

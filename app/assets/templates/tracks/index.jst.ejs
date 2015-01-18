@@ -1,1 +1,9 @@
-Track Index
+<h2>Track Index</h2>
+
+<ul class="list-group">
+  <% tracks.each(function (t) { %>
+    <li class="list-group-item">
+      <a href="#track/<%= t.id %>"><%= t.escape("title") %></a>
+    </li>
+  <% }); %>
+</ul>

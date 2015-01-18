@@ -4,7 +4,8 @@ CodeRacer.Routers.Router = Backbone.Router.extend({
   },
 
   routes: {
-    '': 'index'
+    '': 'index',
+    'track/:id': 'track'
   },
 
   index: function () {
@@ -12,6 +13,16 @@ CodeRacer.Routers.Router = Backbone.Router.extend({
 
     var view = new CodeRacer.Views.TracksIndex({
       collection: CodeRacer.tracks
+    });
+
+    this._swapView(view);
+  },
+
+  track: function (id) {
+    var track = CodeRacer.tracks.getOrFetch(id);
+
+    var view = new CodeRacer.Views.TrackDetail({
+      model: track
     });
 
     this._swapView(view);
