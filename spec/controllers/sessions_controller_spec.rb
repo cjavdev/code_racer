@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe SessionsController, :type => :controller do
   describe '#create' do
     before(:each) do
-      OmniAuth.config.add_mock(:github, { :uid => '12345', email: "test@example.com", name: "Test Name" })
+      OmniAuth.config.add_mock(:github, fake_auth_hash)
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
     end
 
