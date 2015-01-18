@@ -14,8 +14,8 @@
 FactoryGirl.define do
   factory :track do
     content "MyText"
-title "MyString"
-about "MyString"
+    title "MyString"
+    about "MyString"
+    association :author, factory: :user
   end
-
 end
