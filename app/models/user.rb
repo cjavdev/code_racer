@@ -8,4 +8,10 @@ class User < ActiveRecord::Base
       name: auth_hash.fetch(:name)
     )
   end
+
+  def reset_session_token!
+    self.session_token = SecureRandom.hex
+    save!
+    session_token
+  end
 end

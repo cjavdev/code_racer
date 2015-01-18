@@ -2,10 +2,15 @@ require 'rails_helper'
 
 RSpec.describe SessionsController, :type => :controller do
   describe '#create' do
-    subject { get '/auth/github/callback' }
+    before(:each) do
+      OmniAuth.config.add_mock(:github, { :uid => '12345', email: "test@example.com", name: "Test Name" })
+      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
+    end
+
     context 'with valid credentials' do
       it 'redirects to StaticPages#root' do
-        OmniAuth.config.add_mock(:github, { :uid => '12345' })
+        get :create
+        expect(subject).to be_logged_in
         expect(subject).to redirect_to('/')
       end
     end

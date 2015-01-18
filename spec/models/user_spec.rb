@@ -18,4 +18,12 @@ RSpec.describe User, :type => :model do
       }.to change(User, :count).by(1)
     end
   end
+
+  describe '#reset_session_token!' do
+    it 'resets the session token and returns it' do
+      u = create(:user)
+      old_token = u.session_token
+      expect(u.reset_session_token!).not_to eq(old_token)
+    end
+  end
 end

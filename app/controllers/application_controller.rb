@@ -7,7 +7,15 @@ class ApplicationController < ActionController::Base
     redirect_to "/welcome" unless logged_in?
   end
 
-  def logged_in?
+  def login(user)
+    session[:token] = user.reset_session_token!
+  end
 
+  def logged_in?
+    !!current_user
+  end
+
+  def current_user
+    @_current_user ||= User.find_by(session_token: session[:token])
   end
 end
