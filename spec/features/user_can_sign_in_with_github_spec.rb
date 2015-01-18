@@ -5,6 +5,7 @@ feature 'User can sign in with Github' do
     visit root_url
     click_on "Sign in with Github"
 
+
     expect(page).to have_content("Welcome!")
   end
 end
