@@ -4,6 +4,10 @@ window.CodeRacer = {
   Views: {},
   Routers: {},
   initialize: function() {
-    alert('Hello from Backbone!');
+    var router = new CodeRacer.Routers.Router({
+      $rootEl: $('#main')
+    });
+
+    Backbone.history.start();
   }
 };
