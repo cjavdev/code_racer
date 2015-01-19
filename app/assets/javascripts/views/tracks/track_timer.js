@@ -15,8 +15,13 @@ CodeRacer.Views.TrackTimer = Backbone.View.extend({
     return 0;
   },
 
+  time: function () {
+    return this.timer.roundSeconds();
+  },
+
   render: function () {
     var content = this.template({
+      time: this.time(),
       timer: this.timer,
       wpm: this.wpm()
     });
@@ -24,7 +29,3 @@ CodeRacer.Views.TrackTimer = Backbone.View.extend({
     return this;
   },
 });
-
-
-
-

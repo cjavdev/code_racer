@@ -1,2 +1,9 @@
-<%= timer.roundSeconds() %>
-WPM: <%= wpm %>
+<h2>
+  <% if(timer.countDown) { %>
+    Get Ready!
+  <% } else { %>
+    WPM: <%= wpm %>
+  <% } %>
+</h2>
+
+<%= time %> Seconds

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require underscore
 //= require backbone
+//= require moment
 //= require code_racer
 //= require_tree ../templates
 //= require_tree ./models

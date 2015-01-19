@@ -14,6 +14,7 @@ gem 'backbone-on-rails'
 gem 'newrelic_rpm'
 gem 'bootstrap-sass'
 gem 'bootswatch-rails'
+gem 'momentjs-rails'
 
 group :development do
   gem 'better_errors'
