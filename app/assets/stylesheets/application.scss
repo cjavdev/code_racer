@@ -28,3 +28,27 @@ body { padding-top: 60px; }
 .wrong {
   background-color: red;
 }
+
+.backdrop {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .75);
+}
+
+.pop {
+  z-index: 10;
+  padding: 20px;
+  border-radius: 3px;
+  position: fixed;
+  top: 15%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  background-color: white;
+}
+
+

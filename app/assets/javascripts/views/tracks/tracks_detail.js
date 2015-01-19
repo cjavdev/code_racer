@@ -54,6 +54,10 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
   gameOver: function () {
     this.timer.stop();
     this.$('input').prop('disabled', true);
+    this.gameOverView = new CodeRacer.Views.TrackOver({
+      wpm: this.timerView.wpm()
+    });
+    this.$el.append(this.gameOverView.render().$el);
   },
 
   renderContent: function () {
