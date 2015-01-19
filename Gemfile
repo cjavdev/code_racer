@@ -15,6 +15,7 @@ gem 'newrelic_rpm'
 gem 'bootstrap-sass'
 gem 'bootswatch-rails'
 gem 'momentjs-rails'
+gem 'thin'
 
 group :development do
   gem 'better_errors'
