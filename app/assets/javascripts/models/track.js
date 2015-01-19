@@ -27,12 +27,23 @@ CodeRacer.Models.Track = Backbone.Model.extend({
     }
     return this._wordChecker;
   },
+
+  parse: function (data) {
+    if(data.content) {
+      this.wordChecker().setContent(data.content);
+    }
+    return data;
+  },
 });
 
 function WordChecker(content) {
-  this.words = this.splitIntoWords(content || "");
+  this.setContent(content);
   this.currentIndex = 0;
 }
+
+WordChecker.prototype.setContent = function(content) {
+  this.words = this.splitIntoWords(content || "");
+};
 
 WordChecker.prototype.splitIntoWords = function(content) {
   return content.split(" ");

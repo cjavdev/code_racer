@@ -10,15 +10,15 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
   },
 
   handleKeyUp: function (event) {
-    if(event.keyCode === 16) {
+    if (event.keyCode === 16) {
       return;
     }
-    if(event.keyCode === 32) {
-      if(this.model.wordComplete(this.$('input').val())) {
+    if (event.keyCode === 32) {
+      if (this.model.wordComplete(this.$('input').val())) {
         this.$('input').val('');
       }
     }
-    if(!this.model.checkWord(this.$('input').val())) {
+    if (!this.model.checkWord(this.$('input').val())) {
       this.$('input').addClass('wrong');
     } else {
       this.$('input').removeClass('wrong');

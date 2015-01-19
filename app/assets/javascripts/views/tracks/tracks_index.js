@@ -2,6 +2,7 @@ CodeRacer.Views.TracksIndex = Backbone.View.extend({
   initialize: function () {
     this.listenTo(this.collection, 'sync', this.render);
   },
+
   template: JST['tracks/index'],
 
   render: function () {
