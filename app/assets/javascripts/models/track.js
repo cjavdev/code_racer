@@ -17,6 +17,10 @@ CodeRacer.Models.Track = Backbone.Model.extend({
     return this.wordChecker().backSpace();
   },
 
+  content: function () {
+    return this.wordChecker().render();
+  },
+
   wordChecker: function () {
     if(!this._wordChecker) {
       this._wordChecker = new WordChecker(this.get('content'));
@@ -26,7 +30,7 @@ CodeRacer.Models.Track = Backbone.Model.extend({
 });
 
 function WordChecker(content) {
-  this.words = this.splitIntoWords(content);
+  this.words = this.splitIntoWords(content || "");
   this.currentIndex = 0;
 }
 
@@ -48,6 +52,21 @@ WordChecker.prototype.wordComplete = function (word) {
     return true;
   }
   return false;
+};
+
+WordChecker.prototype.render = function() {
+  var i, result = [];
+  for(i = 0; i < this.words.length; i++) {
+    if(this.currentIndex === i) {
+      result.push("<strong>");
+    }
+    result.push(this.words[i]);
+    if(this.currentIndex === i) {
+      result.push("</strong>");
+    }
+    result.push(" ");
+  }
+  return result.join("");
 };
 
 WordChecker.prototype.checkWord = function(word) {
