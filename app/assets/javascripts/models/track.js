@@ -1,6 +1,10 @@
 CodeRacer.Models.Track = Backbone.Model.extend({
   urlRoot: '/api/tracks',
 
+  currentWordCount: function () {
+    return this.wordChecker().currentWordCount();
+  },
+
   checkWord: function (word) {
     return this.wordChecker().checkWord(word);
   },
@@ -19,6 +23,14 @@ CodeRacer.Models.Track = Backbone.Model.extend({
 
   content: function () {
     return this.wordChecker().render();
+  },
+
+  moreWords: function () {
+    return this.wordChecker().moreWords();
+  },
+
+  wordCount: function () {
+    return this.wordChecker().wordCount();
   },
 
   wordChecker: function () {
@@ -80,10 +92,27 @@ WordChecker.prototype.render = function() {
   return result.join("");
 };
 
+WordChecker.prototype.currentWordCount = function () {
+  return this.currentIndex;
+};
+
 WordChecker.prototype.checkWord = function(word) {
+  if(this.currentIndex === this.words.length - 1 && word === this.currentWord()) {
+     this.currentIndex++;
+     return true;
+  }
+
   if(this.currentWord().startsWith(word)) {
     return true;
   }
 
   return false;
+};
+
+WordChecker.prototype.wordCount = function() {
+  return this.words.length;
+};
+
+WordChecker.prototype.moreWords = function () {
+  return this.currentIndex !== this.words.length;
 };

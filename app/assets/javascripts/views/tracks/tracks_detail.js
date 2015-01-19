@@ -1,29 +1,59 @@
 CodeRacer.Views.TrackDetail = Backbone.View.extend({
   initialize: function () {
     this.listenTo(this.model, 'sync', this.render);
+    this.timer = new CodeRacer.Models.Timer();
+
+    this.timerView = new CodeRacer.Views.TrackTimer({
+      timer: this.timer,
+      track: this.model
+    });
+
+    this.listenTo(this.timer, 'go', this.startRace);
+  },
+
+  startRace: function () {
+    this.$('input').prop('disabled', false);
+    this.$('input').focus();
   },
 
   template: JST['tracks/detail'],
 
   events: {
-    'keyup input': 'handleKeyUp'
+    'keydown input': 'handleKeyDown'
   },
 
-  handleKeyUp: function (event) {
+  renderTimer: function () {
+    this.$('.timer').html(this.timerView.render().$el);
+  },
+
+  handleKeyDown: function (event) {
     if (event.keyCode === 16) {
       return;
     }
-    if (event.keyCode === 32) {
-      if (this.model.wordComplete(this.$('input').val())) {
-        this.$('input').val('');
+    var $input = this.$('input');
+    setTimeout(function () {
+      console.log($input.val());
+      if (event.keyCode === 32) {
+        if (this.model.wordComplete($input.val())) {
+          $input.val('');
+        }
       }
-    }
-    if (!this.model.checkWord(this.$('input').val())) {
-      this.$('input').addClass('wrong');
-    } else {
-      this.$('input').removeClass('wrong');
-    }
-    this.renderContent();
+      if (!this.model.checkWord($input.val())) {
+        $input.addClass('wrong');
+      } else {
+        $input.removeClass('wrong');
+      }
+      if(this.model.moreWords()) {
+        this.renderContent();
+      } else {
+        this.gameOver();
+      }
+    }.bind(this), 0);
+  },
+
+  gameOver: function () {
+    this.timer.stop();
+    this.$('input').prop('disabled', true);
   },
 
   renderContent: function () {
@@ -35,6 +65,8 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
       track: this.model
     });
     this.$el.html(content);
+    this.$('input').prop('disabled', true);
+    this.renderTimer();
     return this;
   },
 });
