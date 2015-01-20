@@ -19,7 +19,8 @@ CodeRacer.Routers.Router = Backbone.Router.extend({
   },
 
   track: function (id) {
-    var track = CodeRacer.tracks.getOrFetch(id);
+    var track = new CodeRacer.Models.Track({ id: id });
+    track.fetch();
 
     var view = new CodeRacer.Views.TrackDetail({
       model: track
