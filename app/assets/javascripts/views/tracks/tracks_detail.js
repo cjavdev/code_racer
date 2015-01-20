@@ -32,7 +32,6 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
     }
     var $input = this.$('input');
     setTimeout(function () {
-      console.log($input.val());
       if (event.keyCode === 32) {
         if (this.model.wordComplete($input.val())) {
           $input.val('');
