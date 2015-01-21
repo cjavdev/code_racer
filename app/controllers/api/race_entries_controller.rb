@@ -1,7 +1,7 @@
 module Api
   class RaceEntriesController < ApplicationController
     def create
-      @registration = RaceRegistration.new(current_user, params)
+      @registration = RaceRegistration.new(current_user, current_track)
 
       if @registration.save
         render json: @registration
@@ -14,6 +14,6 @@ module Api
   private
 
   def current_track
-
+    Track.find(params[:track_id])
   end
 end

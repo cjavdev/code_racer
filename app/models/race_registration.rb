@@ -7,8 +7,13 @@ class RaceRegistration
   end
 
   def save
-    track.current_race.join
-    # join the tracks current race
-    # or create a new race and join that
+    create_race! unless track.current_race
+    track.current_race.join(user)
+  end
+
+  private
+
+  def create_race!
+    track.races.create!
   end
 end
