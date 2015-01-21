@@ -13,4 +13,9 @@
 
 class Track < ActiveRecord::Base
   belongs_to :author, class_name: "User"
+  has_many :races
+
+  def current_race
+    races.open_for_registration.first
+  end
 end

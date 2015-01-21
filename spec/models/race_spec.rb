@@ -11,5 +11,29 @@
 require 'rails_helper'
 
 RSpec.describe Race, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should have_many(:race_entries) }
+  it { should belong_to(:track) }
+
+  describe '#open_for_registration?' do
+    it 'should be open during the 15 seconds after creation' do
+      race = create(:race)
+      expect(race).to be_open_for_registration
+    end
+
+    it 'should close after 16 seconds' do
+      race = create(:race, created_at: 16.seconds.ago)
+      expect(race).not_to be_open_for_registration
+    end
+  end
+
+  describe '#join' do
+    it 'should add an entry for the user' do
+      user = create(:user)
+      race = create(:race)
+
+      expect {
+        race.join(user)
+      }.to change(RaceEntry, :count).by(1)
+    end
+  end
 end
