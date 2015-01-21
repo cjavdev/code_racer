@@ -1,0 +1,16 @@
+# == Schema Information
+#
+# Table name: race_entries
+#
+#  id         :integer          not null, primary key
+#  race_id    :integer          not null
+#  user_id    :integer          not null
+#  wpm        :float
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+class RaceEntry < ActiveRecord::Base
+  belongs_to :race
+  belongs_to :user
+end

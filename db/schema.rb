@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150118224859) do
+ActiveRecord::Schema.define(version: 20150120222534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "race_entries", force: :cascade do |t|
+    t.integer  "race_id",    null: false
+    t.integer  "user_id",    null: false
+    t.float    "wpm"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "race_entries", ["race_id", "user_id"], name: "index_race_entries_on_race_id_and_user_id", unique: true, using: :btree
+  add_index "race_entries", ["race_id"], name: "index_race_entries_on_race_id", using: :btree
+  add_index "race_entries", ["user_id"], name: "index_race_entries_on_user_id", using: :btree
+
+  create_table "races", force: :cascade do |t|
+    t.integer  "track_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "races", ["track_id"], name: "index_races_on_track_id", using: :btree
 
   create_table "tracks", force: :cascade do |t|
     t.text     "content",    null: false

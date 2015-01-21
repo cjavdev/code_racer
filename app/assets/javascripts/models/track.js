@@ -33,9 +33,18 @@ CodeRacer.Models.Track = Backbone.Model.extend({
     return this.wordChecker().wordCount();
   },
 
+  cars: function () {
+    if(!this._cars) {
+      this._cars = new CodeRacer.Collections.Cars([], {
+        track: this
+      });
+    }
+    return this._cars;
+  },
+
   wordChecker: function () {
     if(!this._wordChecker) {
-      this._wordChecker = new WordChecker(this.get('content'));
+      this._wordChecker = new CodeRacer.Models.WordChecker(this.get('content'));
     }
     return this._wordChecker;
   },
@@ -47,72 +56,3 @@ CodeRacer.Models.Track = Backbone.Model.extend({
     return data;
   },
 });
-
-function WordChecker(content) {
-  this.setContent(content);
-  this.currentIndex = 0;
-}
-
-WordChecker.prototype.setContent = function(content) {
-  this.words = this.splitIntoWords(content || "");
-};
-
-WordChecker.prototype.splitIntoWords = function(content) {
-  return content.split(" ");
-};
-
-WordChecker.prototype.currentWord = function() {
-  return this.words[this.currentIndex];
-};
-
-WordChecker.prototype.currentPaddedWord = function() {
-  return this.currentWord() + ' ';
-};
-
-WordChecker.prototype.wordComplete = function (word) {
-  if(this.currentPaddedWord() === word) {
-    this.currentIndex++;
-    return true;
-  }
-  return false;
-};
-
-WordChecker.prototype.render = function() {
-  var i, result = [];
-  for(i = 0; i < this.words.length; i++) {
-    if(this.currentIndex === i) {
-      result.push("<strong>");
-    }
-    result.push(this.words[i]);
-    if(this.currentIndex === i) {
-      result.push("</strong>");
-    }
-    result.push(" ");
-  }
-  return result.join("");
-};
-
-WordChecker.prototype.currentWordCount = function () {
-  return this.currentIndex;
-};
-
-WordChecker.prototype.checkWord = function(word) {
-  if(this.currentIndex === this.words.length - 1 && word === this.currentWord()) {
-     this.currentIndex++;
-     return true;
-  }
-
-  if(this.currentWord().startsWith(word)) {
-    return true;
-  }
-
-  return false;
-};
-
-WordChecker.prototype.wordCount = function() {
-  return this.words.length;
-};
-
-WordChecker.prototype.moreWords = function () {
-  return this.currentIndex !== this.words.length;
-};

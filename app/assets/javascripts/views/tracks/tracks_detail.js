@@ -2,6 +2,9 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
   initialize: function () {
     this.listenTo(this.model, 'sync', this.render);
     this.timer = new CodeRacer.Models.Timer();
+    this.carsIndex = new CodeRacer.Views.CarsIndex({
+      collection: this.model.cars()
+    });
 
     this.timerView = new CodeRacer.Views.TrackTimer({
       timer: this.timer,
@@ -9,6 +12,10 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
     });
 
     this.listenTo(this.timer, 'go', this.startRace);
+  },
+
+  renderCars: function () {
+    this.$('.cars').html(this.carsIndex.render().$el);
   },
 
   startRace: function () {
@@ -70,6 +77,7 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
     this.$el.html(content);
     this.$('input').prop('disabled', true);
     this.renderTimer();
+    this.renderCars();
     return this;
   },
 });

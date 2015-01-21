@@ -15,6 +15,7 @@
 class User < ActiveRecord::Base
   validates :session_token, :nickname, presence: true
   has_many :authored_tracks, class_name: "Track", foreign_key: :author_id
+  has_many :race_entries
 
   before_validation do
     self.session_token ||= SecureRandom.hex

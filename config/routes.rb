@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/auth/github/callback' => 'sessions#create'
 
   namespace :api, defaults: { format: :json } do
-    resources :tracks
+    resources :tracks, only: [:index, :show]
+    resources :race_entries, only: [:create]
   end
 end
