@@ -11,6 +11,14 @@ class RaceRegistration
     track.current_race.join(user)
   end
 
+  def errors
+    track.errors
+  end
+
+  def as_json(*args, &blk)
+    { nickname: @user.nickname, race_id: @track.current_race.id }
+  end
+
   private
 
   def create_race!

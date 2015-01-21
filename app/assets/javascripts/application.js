@@ -15,6 +15,7 @@
 //= require underscore
 //= require backbone
 //= require moment
+//= require backpusher
 //= require code_racer
 //= require_tree ../templates
 //= require_tree ./models
@@ -35,14 +36,3 @@ if (!String.prototype.startsWith) {
   });
 }
 
-Pusher.log = function (message) {
-  if (window.console && window.console.log) {
-    window.console.log(message);
-  }
-};
-
-var pusher = new Pusher('a8a65e2a4b66ac9bc348');
-var channel = pusher.subscribe('test_channel');
-channel.bind('my_event', function (data) {
-  alert(data.message);
-});

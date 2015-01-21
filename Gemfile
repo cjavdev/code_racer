@@ -17,7 +17,7 @@ gem 'bootswatch-rails'
 gem 'momentjs-rails'
 gem 'thin'
 gem 'font-awesome-sass'
-gem 'pusher'
+gem 'pusher_rails'
 
 group :development do
   gem 'better_errors'

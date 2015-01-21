@@ -34,7 +34,7 @@ CodeRacer.Models.Track = Backbone.Model.extend({
   },
 
   cars: function () {
-    if(!this._cars) {
+    if (!this._cars) {
       this._cars = new CodeRacer.Collections.Cars([], {
         track: this
       });
@@ -43,16 +43,29 @@ CodeRacer.Models.Track = Backbone.Model.extend({
   },
 
   wordChecker: function () {
-    if(!this._wordChecker) {
+    if (!this._wordChecker) {
       this._wordChecker = new CodeRacer.Models.WordChecker(this.get('content'));
     }
     return this._wordChecker;
   },
 
   parse: function (data) {
-    if(data.content) {
+    if (data.content) {
       this.wordChecker().setContent(data.content);
     }
     return data;
+  },
+
+  join: function () {
+    this.cars().create({
+      track_id: this.id
+    }, {
+      success: function (car) {
+        this.channel = CodeRacer.pusher.subscribe('race_' + car.get('race_id'));
+        this.channel.bind('add_car', function (data) {
+          alert(data.message);
+        });
+      }.bind(this)
+    });
   },
 });

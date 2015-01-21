@@ -2,15 +2,14 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
   initialize: function () {
     this.listenTo(this.model, 'sync', this.render);
     this.timer = new CodeRacer.Models.Timer();
+    this.model.join();
     this.carsIndex = new CodeRacer.Views.CarsIndex({
       collection: this.model.cars()
     });
-
     this.timerView = new CodeRacer.Views.TrackTimer({
       timer: this.timer,
       track: this.model
     });
-
     this.listenTo(this.timer, 'go', this.startRace);
   },
 

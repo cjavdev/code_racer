@@ -9,11 +9,11 @@ module Api
         render json: @registration.errors, status: 422
       end
     end
-  end
 
-  private
+    private
 
-  def current_track
-    Track.find(params[:track_id])
+    def current_track
+      Track.find(params[:track_id])
+    end
   end
 end

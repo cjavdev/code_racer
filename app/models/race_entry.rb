@@ -12,6 +12,7 @@
 
 class RaceEntry < ActiveRecord::Base
   validates :user, :race, presence: true
+  validates :user, uniqueness: { scope: :race }
   belongs_to :race
   belongs_to :user
 end

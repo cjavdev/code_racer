@@ -10,4 +10,13 @@ window.CodeRacer = {
 
     Backbone.history.start();
   }
+}
+
+Pusher.log = function (message) {
+  if (window.console && window.console.log) {
+    window.console.log(message);
+  }
 };
+
+CodeRacer.pusher = new Pusher('ec38d09303a657c3fd5e');
+
