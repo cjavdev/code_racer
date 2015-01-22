@@ -36,4 +36,12 @@ RSpec.describe Race, :type => :model do
       }.to change(RaceEntry, :count).by(1)
     end
   end
+
+  describe '#start_at' do
+    it 'returns 15 seconds after created_at' do
+      t = Time.now
+      race = create(:race, created_at: t)
+      expect(race.start_at).to eq(t + 15.seconds)
+    end
+  end
 end
