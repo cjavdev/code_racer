@@ -77,22 +77,19 @@ CodeRacer.Models.Track = Backbone.Model.extend({
     this.channel.bind('add_car', function (otherCar) {
       this.cars().add(otherCar)
     }.bind(this));
-    this.channel.bind('client-update_speed', function (speed) {
-      debugger;
+    this.channel.bind('update_speed', function (speed) {
       this.cars().get(speed.id).set('wpm', speed.wpm);
     }.bind(this));
   },
 
   join: function (timer) {
-    this.cars().create({
-      track_id: this.id
-    }, {
-      success: function (car) {
-        this.car = car;
-        timer.startAt(new Date(car.get('start_at')));
-        this.channel = CodeRacer.pusher.subscribe('race_' + car.get('race_id'));
-        this.bindTrackEvents();
-      }.bind(this)
-    });
+    this.car = new CodeRacer.Models.Car({ track_id: this.id });
+    this.car.collection = this.cars();
+    this.car.save().then(function () {
+      this.cars().add(this.car);
+      timer.startAt(new Date(this.car.get('start_at')));
+      this.channel = CodeRacer.pusher.subscribe('race_' + this.car.get('race_id'));
+      this.bindTrackEvents();
+    }.bind(this));
   },
 });

@@ -9,12 +9,13 @@
 #
 
 class Race < ActiveRecord::Base
+  DELAY = 15
   belongs_to :track
   has_many :race_entries
-  scope :open_for_registration, -> { where('created_at > ?', 15.seconds.ago) }
+  scope :open_for_registration, -> { where('created_at > ?', DELAY.seconds.ago) }
 
   def open_for_registration?
-    created_at > 15.seconds.ago
+    created_at > DELAY.seconds.ago
   end
 
   def join(user)
@@ -22,6 +23,6 @@ class Race < ActiveRecord::Base
   end
 
   def start_at
-    created_at + 15.seconds
+    created_at + DELAY.seconds
   end
 end

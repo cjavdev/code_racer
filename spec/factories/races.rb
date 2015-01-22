@@ -12,5 +12,4 @@ FactoryGirl.define do
   factory :race do
     track_id 1
   end
-
 end

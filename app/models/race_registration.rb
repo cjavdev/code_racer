@@ -33,7 +33,17 @@ class RaceRegistration
     })
   end
 
-  private
+  def other_cars
+    current_race.race_entries.map do |entry|
+      if entry.user != user
+        {
+          nickname: entry.user.nickname,
+          id: entry.user.id,
+          race_id: current_race.id
+        }
+      end
+    end.compact
+  end
 
   def race_channel
     "race_#{ current_race.id }"
@@ -43,13 +53,7 @@ class RaceRegistration
     track.current_race
   end
 
-  def other_cars
-    track.current_race.race_entries.map do |entry|
-      unless entry.user == user
-        { nickname: entry.user.nickname }
-      end
-    end.compact
-  end
+  private
 
   def create_race!
     track.races.create!

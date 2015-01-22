@@ -1,6 +1,6 @@
 CodeRacer.Views.CarsIndexItem = Backbone.View.extend({
   initialize: function () {
-    this.listenTo(this.model, 'sync', this.render);
+    this.listenTo(this.model, 'sync change', this.render);
   },
 
   template: JST['cars/index_item'],
