@@ -26,7 +26,7 @@ class RaceRegistration
   end
 
   def notify!
-    Pusher["race_#{ current_race.id }"].trigger('add_car', {
+    Pusher[race_channel].trigger('add_car', {
       id: user.id,
       nickname: user.nickname,
       race_id: current_race.id
@@ -34,6 +34,10 @@ class RaceRegistration
   end
 
   private
+
+  def race_channel
+    "race_#{ current_race.id }"
+  end
 
   def current_race
     track.current_race
