@@ -1,3 +1,9 @@
-Car
 <%= car.escape("nickname") %>
 <%= car.get("wpm") %>
+<div class="progress">
+  <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="<%=
+    car.get('percent_complete') %>" aria-valuemin="0"
+    aria-valuemax="100" style="width: <%= car.get('percent_complete') %>%;">
+    <span class="sr-only"><%= car.get('percent_complete') %>% Complete</span>
+  </div>
+</div>

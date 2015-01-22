@@ -70,7 +70,7 @@
     },
 
     percentComplete: function () {
-      return this.currentIndex / this.words.length;
+      return parseInt(100 * (this.currentIndex / this.words.length));
     },
   };
 }());

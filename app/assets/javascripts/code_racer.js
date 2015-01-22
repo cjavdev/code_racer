@@ -8,6 +8,12 @@ window.CodeRacer = {
       $rootEl: $('#main')
     });
 
+    var header = new CodeRacer.Views.Header({
+      router: router
+    });
+
+    $('#header').html(header.render().$el);
+
     Backbone.history.start();
   }
 }

@@ -11,7 +11,7 @@ CodeRacer.Views.CarsIndex = Backbone.View.extend({
       model: car
     });
     this._carViews.push(view);
-    this.$('ul').append(view.render().$el);
+    this.$('div.cars').append(view.render().$el);
     console.log('adding car');
   },
 

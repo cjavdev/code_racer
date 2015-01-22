@@ -79,6 +79,7 @@ CodeRacer.Models.Track = Backbone.Model.extend({
     }.bind(this));
     this.channel.bind('update_speed', function (speed) {
       this.cars().get(speed.id).set('wpm', speed.wpm);
+      this.cars().get(speed.id).set('percent_complete', speed.percent_complete);
     }.bind(this));
   },
 

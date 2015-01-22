@@ -1,8 +1,16 @@
 class SessionsController < ApplicationController
+  skip_before_filter :verify_authenticity_token, only: [:destroy]
+
   def create
     @user = User.find_or_create_from_auth_hash(auth_hash)
     login(@user)
     redirect_to root_path
+  end
+
+  def destroy
+    current_user.reset_session_token!
+    session[:token] = nil
+    redirect_to new_session_url
   end
 
   private
