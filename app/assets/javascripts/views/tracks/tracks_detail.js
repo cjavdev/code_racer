@@ -2,7 +2,7 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
   initialize: function () {
     this.listenTo(this.model, 'sync', this.render);
     this.timer = new CodeRacer.Models.Timer();
-    this.model.join();
+    this.model.join(this.timer);
     this.carsIndex = new CodeRacer.Views.CarsIndex({
       collection: this.model.cars()
     });
@@ -41,6 +41,7 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
       if (event.keyCode === 32) {
         if (this.model.wordComplete($input.val())) {
           $input.val('');
+          this.model.notify(this.timerView.wpm(), this.model.percentComplete());
         }
       }
       if (!this.model.checkWord($input.val())) {
@@ -57,6 +58,7 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
   },
 
   gameOver: function () {
+    this.model.notify(this.timerView.wpm(), this.model.percentComplete());
     this.timer.stop();
     this.$('input').prop('disabled', true);
     this.gameOverView = new CodeRacer.Views.TrackOver({

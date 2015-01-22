@@ -33,6 +33,10 @@ CodeRacer.Models.Track = Backbone.Model.extend({
     return this.wordChecker().wordCount();
   },
 
+  percentComplete: function () {
+    return this.wordChecker().percentComplete();
+  },
+
   cars: function () {
     if (!this._cars) {
       this._cars = new CodeRacer.Collections.Cars([], {
@@ -56,15 +60,38 @@ CodeRacer.Models.Track = Backbone.Model.extend({
     return data;
   },
 
-  join: function () {
+  notify: function (wpm, percentComplete) {
+    $.ajax({
+      type: 'POST',
+      url: '/api/wpm',
+      data: {
+        id: this.car.id,
+        wpm: wpm,
+        percent_complete: percentComplete,
+        race_id: this.car.get('race_id')
+      }
+    });
+  },
+
+  bindTrackEvents: function () {
+    this.channel.bind('add_car', function (otherCar) {
+      this.cars().add(otherCar)
+    }.bind(this));
+    this.channel.bind('client-update_speed', function (speed) {
+      debugger;
+      this.cars().get(speed.id).set('wpm', speed.wpm);
+    }.bind(this));
+  },
+
+  join: function (timer) {
     this.cars().create({
       track_id: this.id
     }, {
       success: function (car) {
+        this.car = car;
+        timer.startAt(new Date(car.get('start_at')));
         this.channel = CodeRacer.pusher.subscribe('race_' + car.get('race_id'));
-        this.channel.bind('add_car', function (other_car) {
-          this.cars().add(other_car)
-        }.bind(this));
+        this.bindTrackEvents();
       }.bind(this)
     });
   },

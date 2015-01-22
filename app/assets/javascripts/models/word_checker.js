@@ -68,5 +68,9 @@
     moreWords: function () {
       return this.currentIndex !== this.words.length;
     },
+
+    percentComplete: function () {
+      return this.currentIndex / this.words.length;
+    },
   };
 }());

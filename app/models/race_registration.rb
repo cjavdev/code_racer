@@ -17,14 +17,17 @@ class RaceRegistration
 
   def as_json(*args, &blk)
     {
+      id: user.id,
       nickname: user.nickname,
       race_id: current_race.id,
+      start_at: current_race.start_at,
       other_cars: other_cars
     }
   end
 
   def notify!
     Pusher["race_#{ current_race.id }"].trigger('add_car', {
+      id: user.id,
       nickname: user.nickname,
       race_id: current_race.id
     })

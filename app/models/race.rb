@@ -20,4 +20,8 @@ class Race < ActiveRecord::Base
   def join(user)
     race_entries.create(user: user)
   end
+
+  def start_at
+    created_at + 15.seconds
+  end
 end
