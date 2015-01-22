@@ -22,7 +22,7 @@ module Api
     end
 
     def update
-      @track = current_user.authored_tracks.find(params[:id])
+      @track = Track.find(params[:id])
 
       if @track.update(track_params)
         render json: @track

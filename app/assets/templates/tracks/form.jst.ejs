@@ -1,0 +1,13 @@
+<div class="form-group">
+  <input placeholder="Title" type="text" name="title"
+  class="form-control" value="<%= car.get('title') %>" />
+</div>
+<div class="form-group">
+  <textarea placeholder="About" name="about" class="form-control"><%=
+    car.get("about") %></textarea>
+</div>
+<div class="form-group">
+  <textarea placeholder="Content" name="content" rows="10" cols="80"
+    class="form-control"><%= car.get("content") %></textarea>
+</div>
+<button type="submit" class="btn btn-primary pull-right">Submit</button>

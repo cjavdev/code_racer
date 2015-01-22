@@ -7,11 +7,23 @@ CodeRacer.Routers.Router = Backbone.Router.extend({
     '': 'index',
     '_=_': 'index',
     'track/new': 'new',
-    'track/:id': 'track'
+    'track/:id': 'track',
+    'track/:id/edit': 'edit'
+  },
+
+  edit: function (id) {
+    var track = new CodeRacer.Models.Track({ id: id });
+    track.fetch();
+
+    var view = new CodeRacer.Views.TrackForm({
+      model: track
+    });
+
+    this._swapView(view);
   },
 
   new: function () {
-    var view = new CodeRacer.Views.TrackNew({
+    var view = new CodeRacer.Views.TrackForm({
       model: new CodeRacer.Models.Track()
     });
 
