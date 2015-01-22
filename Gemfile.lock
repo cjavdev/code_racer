@@ -219,6 +219,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    serialize_json-rails (0.0.1)
     shoulda-matchers (2.7.0)
       activesupport (>= 3.0.0)
     signature (0.1.8)
@@ -282,6 +283,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  serialize_json-rails
   shoulda-matchers
   spring
   thin

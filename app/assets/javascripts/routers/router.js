@@ -6,7 +6,16 @@ CodeRacer.Routers.Router = Backbone.Router.extend({
   routes: {
     '': 'index',
     '_=_': 'index',
+    'track/new': 'new',
     'track/:id': 'track'
+  },
+
+  new: function () {
+    var view = new CodeRacer.Views.TrackNew({
+      model: new CodeRacer.Models.Track()
+    });
+
+    this._swapView(view);
   },
 
   index: function () {

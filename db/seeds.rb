@@ -1,5 +1,11 @@
 cj = User.first
 cj.authored_tracks.where(
+  title: "Track 1",
+  content: "Test test test",
+  about: "blah"
+).first_or_create!
+
+cj.authored_tracks.where(
   title: "Peter",
   content: "The way Mr. Darling won her was this: the many gentlemen who had been boys when she was a girl discovered simultaneously that they loved her, and they all ran to her house to propose to her except Mr. Darling, who took a cab and nipped in first, and so he got her. He got all of her, except the innermost box and the kiss. He never knew about the box, and in time he gave up trying for the kiss. Wendy thought Napoleon could have got it, but I can picture him trying, and then going off in a passion, slamming the door.",
   about: "Exerpt from The Adventures of Peter Pan by James M. Berrie"

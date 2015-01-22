@@ -19,6 +19,7 @@ gem 'momentjs-rails'
 gem 'thin'
 gem 'font-awesome-sass'
 gem 'pusher_rails'
+gem 'serialize_json-rails'
 
 group :development do
   gem 'better_errors'
