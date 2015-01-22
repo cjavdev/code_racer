@@ -22,9 +22,9 @@ class User < ActiveRecord::Base
   end
 
   def self.find_or_create_from_auth_hash(auth_hash, provider)
-    u = User.find_by(uid: auth_hash.fetch(:uid))
+    u = User.find_by(uid: auth_hash.fetch(:uid), provider: provider)
     return u if u
-    if provider == :github
+    if provider == "github"
       u = User.create!(
         uid: auth_hash.fetch(:uid),
         email: auth_hash.fetch(:info).fetch(:email),
