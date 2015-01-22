@@ -16,9 +16,9 @@ CodeRacer.Views.CarsIndex = Backbone.View.extend({
   },
 
   renderCars: function () {
-    this.$('ul').empty();
+    this.$('div.cars').empty();
     _(this._carViews).each(function (v) {
-      this.$('ul').append(v.$el);
+      this.$('div.cars').append(v.$el);
       v.delegateEvents();
     }, this);
   },
