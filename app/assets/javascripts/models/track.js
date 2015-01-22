@@ -62,9 +62,9 @@ CodeRacer.Models.Track = Backbone.Model.extend({
     }, {
       success: function (car) {
         this.channel = CodeRacer.pusher.subscribe('race_' + car.get('race_id'));
-        this.channel.bind('add_car', function (data) {
-          alert(data.message);
-        });
+        this.channel.bind('add_car', function (other_car) {
+          this.cars().add(other_car)
+        }.bind(this));
       }.bind(this)
     });
   },

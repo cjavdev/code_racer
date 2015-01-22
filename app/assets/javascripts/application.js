@@ -15,7 +15,6 @@
 //= require underscore
 //= require backbone
 //= require moment
-//= require backpusher
 //= require code_racer
 //= require_tree ../templates
 //= require_tree ./models

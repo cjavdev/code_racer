@@ -4,6 +4,7 @@ module Api
       @registration = RaceRegistration.new(current_user, current_track)
 
       if @registration.save
+        @registration.notify!
         render json: @registration
       else
         render json: @registration.errors, status: 422
