@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
   def destroy
     current_user.reset_session_token!
     session[:token] = nil
-    redirect_to new_session_url
+    redirect_to root_url
   end
 
   private

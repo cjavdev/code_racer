@@ -13,12 +13,12 @@ cj.authored_tracks.where(
 
 cj.authored_tracks.where(
   title: "Robin Hood",
-  content: "The fond mother sighed when she saw the boy's face light up at these woodland tales.  She was of gentle birth, and had hoped to see her son famous at court or abbey.  She taught him to read and to write, to doff his cap without awkwardness and to answer directly and truthfully both lord and peasant.  But the boy, although he took kindly to these lessons of breeding, was yet happiest when he had his beloved bow in hand and strolled at will, listening to the murmur of the trees.",
+  content: "The fond mother sighed when she saw the boy's face light up at these woodland tales. She was of gentle birth, and had hoped to see her son famous at court or abbey. She taught him to read and to write, to doff his cap without awkwardness and to answer directly and truthfully both lord and peasant. But the boy, although he took kindly to these lessons of breeding, was yet happiest when he had his beloved bow in hand and strolled at will, listening to the murmur of the trees.",
   about: "Excerpt from Robin Hood by J. Walker McSpadden"
 ).first_or_create!
 
 cj.authored_tracks.where(
   title: "Robin Hood 2",
-  content: "In the morning the company was early astir and on their way to Nottingham.  It was a goodly cavalcade.  First rode King Richard of the Lion Heart, with his tall figure set forth by the black armor and waving plume in his helm.  Then came Sir Richard of the Lea with fourscore knights and men-at-arms.  And after them came Robin Hood and Maid Marian riding upon milk-white steeds.  Allan-a-Dale also escorted Mistress Dale on horseback, for she was to be matron-of-honor at the wedding.  These were followed by sevenscore archers clad in their bravest Lincoln green, and with their new bows unstrung in token of peace.",
+  content: "In the morning the company was early astir and on their way to Nottingham. It was a goodly cavalcade. First rode King Richard of the Lion Heart, with his tall figure set forth by the black armor and waving plume in his helm. Then came Sir Richard of the Lea with fourscore knights and men-at-arms. And after them came Robin Hood and Maid Marian riding upon milk-white steeds. Allan-a-Dale also escorted Mistress Dale on horseback, for she was to be matron-of-honor at the wedding. These were followed by sevenscore archers clad in their bravest Lincoln green, and with their new bows unstrung in token of peace.",
   about: "Excerpt from Robin Hood by J. Walker McSpadden"
 ).first_or_create!
