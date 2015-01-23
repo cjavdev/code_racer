@@ -14,10 +14,12 @@
 
 FactoryGirl.define do
   factory :user do
-    email "MyString"
-    uid "MyString"
-    name "MyString"
-    nickname "nickname"
+    email { Faker::Internet.email }
+    sequence :uid do |n|
+      n
+    end
+    name { Faker::Name.first_name }
+    nickname { Faker::Internet.user_name }
     session_token "1234"
   end
 end

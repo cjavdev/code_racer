@@ -35,4 +35,16 @@ RSpec.describe Track, :type => :model do
       expect(track.current_race).to eq(race2)
     end
   end
+
+  describe '#top_entry' do
+    it 'returns the fastest wpm race entry for this track' do
+      track = create(:track)
+      race = create(:race, track: track)
+      low_entry = create(:race_entry, race: race, wpm: 1)
+      high_entry = create(:race_entry, race: race, wpm: 3)
+      mid_entry = create(:race_entry, race: race, wpm: 2)
+
+      expect(track.top_entry).to eq(high_entry)
+    end
+  end
 end
