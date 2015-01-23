@@ -1,9 +1,10 @@
-<h2>Words Per Minute Tests</h2>
+<h2>WPM Challenges</h2>
 
-<ul class="list-group">
+<div class="list-group">
   <% tracks.each(function (t) { %>
-    <li class="list-group-item">
-      <a href="#track/<%= t.id %>"><%= t.escape("title") %></a>
-    </li>
+    <a class="list-group-item" href="#track/<%= t.id %>"><%= t.escape("title") %>
+      <%= t.topDog().escape('nickname') %>
+      <span class="badge"><%= t.topDog().escape('wpm') %></span>
+    </a>
   <% }); %>
-</ul>
+</div>

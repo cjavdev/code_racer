@@ -53,9 +53,20 @@ CodeRacer.Models.Track = Backbone.Model.extend({
     return this._wordChecker;
   },
 
+  topDog: function () {
+    if(!this._topDog) {
+      this._topDog = new CodeRacer.Models.User();
+    }
+
+    return this._topDog;
+  },
+
   parse: function (data) {
     if (data.content) {
       this.wordChecker().setContent(data.content);
+    }
+    if (data.top_dog) {
+      this.topDog().set(data.top_dog);
     }
     return data;
   },
