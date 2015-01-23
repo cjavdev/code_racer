@@ -24,7 +24,8 @@ class User < ActiveRecord::Base
   def self.find_or_create_from_auth_hash(auth_hash, provider)
     u = User.find_by(uid: auth_hash.fetch(:uid), provider: provider)
     return u if u
-    if provider == "github"
+    case provider
+    when "github"
       u = User.create!(
         uid: auth_hash.fetch(:uid),
         email: auth_hash.fetch(:info).fetch(:email),
@@ -32,12 +33,20 @@ class User < ActiveRecord::Base
         nickname: auth_hash.fetch(:info).fetch(:nickname),
         provider: provider
       )
-    else
+    when "facebook"
       u = User.create!(
         uid: auth_hash.fetch(:uid),
         email: auth_hash.fetch(:info).fetch(:email),
         name: auth_hash.fetch(:info).fetch(:name),
         nickname: auth_hash.fetch(:info).fetch(:first_name),
+        provider: provider
+      )
+    when "twitter"
+      u = User.create!(
+        uid: auth_hash.fetch(:uid),
+        email: 'noemail@twitter.com',
+        name: auth_hash.fetch(:info).fetch(:name),
+        nickname: auth_hash.fetch(:info).fetch(:nickname),
         provider: provider
       )
     end
