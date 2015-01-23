@@ -2,8 +2,22 @@ CodeRacer.Views.TrackTimer = Backbone.View.extend({
   initialize: function (options) {
     this.timer = options.timer;
     this.track = options.track;
+    this.listenTo(this.timer, 'go', this.removeLoader);
 
-    this.renderInterval = setInterval(this.render.bind(this), 500);
+    this.renderInterval = setInterval(this.renderStats.bind(this), 500);
+  },
+
+  renderStats: function () {
+    if(this.timer.countDown) {
+      this.$('.wpm').html("Get Ready!");
+    } else {
+      this.$('.wpm').html("<span class='label label-success'>" + this.wpm() + "</span> WPM");
+    }
+    this.$('.time').html(this.time());
+  },
+
+  removeLoader: function () {
+    this.$('.loader').remove();
   },
 
   template: JST['tracks/timer'],

@@ -1,9 +1,21 @@
-<h2>
-  <% if(timer.countDown) { %>
-    Get Ready!
-  <% } else { %>
-    WPM: <%= wpm %>
-  <% } %>
-</h2>
-
-<%= time %> Seconds
+<div class="row">
+  <div class="col-md-3">
+    <h3>
+      Seconds <span class="time label label-success"><%= time %></span>
+    </h3>
+  </div>
+  <div class="col-md-6">
+    <div class="loader">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <h3 class="wpm">
+      Get Ready!
+    </h3>
+  </div>
+</div>

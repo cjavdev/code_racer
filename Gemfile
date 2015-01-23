@@ -18,6 +18,7 @@ gem 'bootswatch-rails'
 gem 'momentjs-rails'
 gem 'thin'
 gem 'font-awesome-sass'
+gem 'compass-rails'
 gem 'pusher_rails'
 gem 'serialize_json-rails'
 

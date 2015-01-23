@@ -1,6 +1,6 @@
 CodeRacer.Models.Timer = Backbone.Model.extend({
   initialize: function () {
-    this.seconds = 100;
+    this.seconds = 10;
     this.countDown = true;
     this.tickInterval = setInterval(this.tick.bind(this), 100);
   },

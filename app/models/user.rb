@@ -29,14 +29,16 @@ class User < ActiveRecord::Base
         uid: auth_hash.fetch(:uid),
         email: auth_hash.fetch(:info).fetch(:email),
         name: auth_hash.fetch(:info).fetch(:name),
-        nickname: auth_hash.fetch(:info).fetch(:nickname)
+        nickname: auth_hash.fetch(:info).fetch(:nickname),
+        provider: provider
       )
     else
       u = User.create!(
         uid: auth_hash.fetch(:uid),
         email: auth_hash.fetch(:info).fetch(:email),
         name: auth_hash.fetch(:info).fetch(:name),
-        nickname: auth_hash.fetch(:info).fetch(:first_name)
+        nickname: auth_hash.fetch(:info).fetch(:first_name),
+        provider: provider
       )
     end
   end

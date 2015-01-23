@@ -10,11 +10,13 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require bootstrap-social
  *= require_tree .
  *= require_self
  */
 
-@import "bootswatch/readable/variables";
+@import "compass/css3";
+@import "bootswatch/flatly/variables";
 
 // Then bootstrap itself
 @import "bootstrap";
@@ -25,10 +27,10 @@
 body { padding-top: 75px; }
 
 // And finally bootswatch style itself
-@import "bootswatch/readable/bootswatch";
+@import "bootswatch/flatly/bootswatch";
 
 .wrong {
-  background-color: red;
+  background-color: #E74C3C;
 }
 
 .backdrop {
@@ -58,4 +60,80 @@ body { padding-top: 75px; }
   color: white;
 }
 
+.loader {
+  height: 50px;
+  left: 50%;
+  margin: 20px 0 0 -75px;
+  position: absolute;
+  top: 50%;
+  width: 150px;
+  @include border-radius(100%);
 
+  .bar {
+    background-color: #00bff3;
+    font-size: 0;
+    height: 3px;
+    opacity: 0;
+    width: 25px;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-fill-mode: both;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: subtleIn;
+    -webkit-animation-timing-function: ease-in-out;
+    @include inline-block;
+
+    &:nth-child(1) {
+     -webkit-animation-delay: 0s;
+    }
+
+    &:nth-child(2) {
+      background-color: #82ca9c;
+     -webkit-animation-delay: .3s;
+    }
+
+    &:nth-child(3) {
+      background-color: #f69679;
+     -webkit-animation-delay: .6s;
+    }
+
+    &:nth-child(4) {
+      background-color: #acd373;
+     -webkit-animation-delay: .9s;
+    }
+
+    &:nth-child(5) {
+      background-color: #959595;
+     -webkit-animation-delay: 1.2s;
+    }
+  }
+}
+
+@-webkit-keyframes subtleIn {
+  0% {
+    opacity: 0;
+    @include transform(translateY(300%));
+  }
+
+  30% {
+    opacity: 1;
+    @include transform(translateY(0));
+  }
+  100% {
+
+  }
+}
+
+.huge-input {
+  font-size: 3em;
+  height: 2em;
+}
+
+.register {
+  display: block;
+  width: 25%;
+  margin: 0 auto;
+  a {
+    display: block;
+    margin: 10px;
+  }
+}
