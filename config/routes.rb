@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resources :tracks, only: [:index, :show, :create, :update]
-    resources :race_entries, only: [:create]
+    resources :race_entries, only: [:create, :update]
     resource :wpm, only: [:create]
   end
 end

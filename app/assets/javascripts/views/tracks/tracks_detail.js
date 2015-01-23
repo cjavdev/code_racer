@@ -58,7 +58,7 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
   },
 
   gameOver: function () {
-    this.model.notify(this.timerView.wpm(), this.model.percentComplete());
+    this.model.notify(this.timerView.wpm(), this.model.percentComplete(), true);
     this.timer.stop();
     this.$('input').prop('disabled', true);
     this.gameOverView = new CodeRacer.Views.TrackOver({

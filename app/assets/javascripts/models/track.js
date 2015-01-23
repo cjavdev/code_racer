@@ -60,7 +60,7 @@ CodeRacer.Models.Track = Backbone.Model.extend({
     return data;
   },
 
-  notify: function (wpm, percentComplete) {
+  notify: function (wpm, percentComplete, over) {
     $.ajax({
       type: 'POST',
       url: '/api/wpm',
@@ -71,6 +71,11 @@ CodeRacer.Models.Track = Backbone.Model.extend({
         race_id: this.car.get('race_id')
       }
     });
+
+    if(over) {
+      this.car.set({ wpm: wpm });
+      this.car.save();
+    }
   },
 
   bindTrackEvents: function () {

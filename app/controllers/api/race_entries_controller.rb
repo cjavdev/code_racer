@@ -11,6 +11,13 @@ module Api
       end
     end
 
+    def update
+      @entry = current_user.race_entries.find_by(race_id: params[:race_id])
+      @entry.wpm = params[:wpm]
+      @entry.save
+      render json: @entry
+    end
+
     private
 
     def current_track
