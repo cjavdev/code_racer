@@ -1,10 +1,15 @@
 <h2>WPM Challenges</h2>
 
 <div class="list-group">
+  <div class="list-group-item active">
+    Challenge
+    <span class="badge">WPM</span>
+    <small class="top-dog">Leader</small>
+  </div>
   <% tracks.each(function (t) { %>
     <a class="list-group-item" href="#track/<%= t.id %>"><%= t.escape("title") %>
-      <%= t.topDog().escape('nickname') %>
       <span class="badge"><%= t.topDog().escape('wpm') %></span>
+      <small class="top-dog"><%= t.topDog().escape('nickname') %></small>
     </a>
   <% }); %>
 </div>
