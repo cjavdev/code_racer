@@ -33,6 +33,8 @@ module Api
       Pusher["stage_#{ @stage.token }"].trigger('start_race', {
         track_id: @registration.track.id
       })
+
+      render json: { message: "Race started!" }
     end
 
     private

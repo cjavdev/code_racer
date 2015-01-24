@@ -16,6 +16,10 @@ class Track < ActiveRecord::Base
   has_many :races
   has_many :race_entries, through: :races
 
+  def self.random
+    offset(rand(count)).first
+  end
+
   def leading_entries
     race_entries
       .where.not(wpm: nil)

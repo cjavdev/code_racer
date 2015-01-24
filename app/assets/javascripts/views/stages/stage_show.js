@@ -11,7 +11,7 @@ CodeRacer.Views.StageShow = Backbone.View.extend({
   },
 
   startRace: function () {
-    console.log('Start Race!');
+    this.model.startRace();
   },
 
   template: JST['stages/show'],
