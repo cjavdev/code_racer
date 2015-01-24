@@ -9,11 +9,24 @@ CodeRacer.Routers.Router = Backbone.Router.extend({
     'track/new': 'new',
     'track/:id': 'track',
     'track/:id/edit': 'edit',
-    'staging': 'staging'
+    'staging(/:token)': 'staging'
   },
 
-  staging: function () {
-    var view = new CodeRacer.Views.WaitingArea();
+  staging: function (token) {
+    var stage = new CodeRacer.Models.Stage();
+    if (token) {
+      stage.fetch({
+        data: {
+          token: token
+        }
+      });
+    } else {
+      stage.save();
+    }
+
+    var view = new CodeRacer.Views.StageShow({
+      model: stage
+    });
 
     this._swapView(view);
   },

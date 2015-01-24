@@ -10,5 +10,6 @@ Rails.application.routes.draw do
     end
     resources :race_entries, only: [:create, :update]
     resource :wpm, only: [:create]
+    resources :stages, only: [:create, :show]
   end
 end
