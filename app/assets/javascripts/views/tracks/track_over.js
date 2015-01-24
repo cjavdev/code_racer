@@ -4,7 +4,7 @@ CodeRacer.Views.TrackOver = Backbone.View.extend({
   },
 
   events: {
-    'click button': 'share',
+    'click button.facebook': 'shareOnFacebook',
     'click .backdrop': 'close'
   },
 
@@ -12,7 +12,7 @@ CodeRacer.Views.TrackOver = Backbone.View.extend({
     this.remove();
   },
 
-  share: function () {
+  shareOnFacebook: function () {
     FB.ui({
       method: 'share',
       href: window.location.toString(),

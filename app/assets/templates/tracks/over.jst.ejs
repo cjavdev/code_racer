@@ -1,5 +1,14 @@
 <div class="backdrop"></div>
 <div class="pop">
   <h2>Awesome! <%= wpm %> Words Per Minute!!</h2>
-  <button class="btn btn-primary btn-facebook"><i class="fa fa-facebook"></i> | Share on Facebook</button>
+  <div class="form-group">
+    <button class="facebook btn btn-primary btn-facebook">
+      <i class="fa fa-facebook"></i> Share on Facebook
+    </button>
+  </div>
+  <div class="form-group">
+    <a href="https://twitter.com/intent/tweet?button_hashtag=wpmchallenge&text=Nailed%20it!%20<%= wpm %>%20WPM" class="twitter-hashtag-button" data-size="large" data-url="http://wpmchallenge.com">Tweet #wpmchallenge</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </div>
 </div>
+
