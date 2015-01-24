@@ -10,6 +10,8 @@
 #  updated_at    :datetime         not null
 #  session_token :string
 #  nickname      :string
+#  provider      :string           default("facebook")
+#  admin         :boolean          default("false")
 #
 
 FactoryGirl.define do

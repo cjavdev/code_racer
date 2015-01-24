@@ -8,7 +8,14 @@ CodeRacer.Routers.Router = Backbone.Router.extend({
     '_=_': 'index',
     'track/new': 'new',
     'track/:id': 'track',
-    'track/:id/edit': 'edit'
+    'track/:id/edit': 'edit',
+    'staging': 'staging'
+  },
+
+  staging: function () {
+    var view = new CodeRacer.Views.WaitingArea();
+
+    this._swapView(view);
   },
 
   edit: function (id) {

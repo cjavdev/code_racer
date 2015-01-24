@@ -10,12 +10,16 @@
 #  updated_at    :datetime         not null
 #  session_token :string
 #  nickname      :string
+#  provider      :string           default("facebook")
+#  admin         :boolean          default("false")
 #
 
 class User < ActiveRecord::Base
   validates :session_token, :nickname, presence: true
   has_many :authored_tracks, class_name: "Track", foreign_key: :author_id
   has_many :race_entries
+
+  has_many :stages, foreign_key: :owner_id
 
   before_validation do
     self.session_token ||= SecureRandom.hex

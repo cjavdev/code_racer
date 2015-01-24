@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122173804) do
+ActiveRecord::Schema.define(version: 20150124184239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,24 @@ ActiveRecord::Schema.define(version: 20150122173804) do
   end
 
   add_index "races", ["track_id"], name: "index_races_on_track_id", using: :btree
+
+  create_table "stage_entries", force: :cascade do |t|
+    t.integer  "stage_id",   null: false
+    t.integer  "user_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "stage_entries", ["stage_id", "user_id"], name: "index_stage_entries_on_stage_id_and_user_id", unique: true, using: :btree
+
+  create_table "stages", force: :cascade do |t|
+    t.integer  "owner_id"
+    t.string   "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "stages", ["owner_id"], name: "index_stages_on_owner_id", using: :btree
 
   create_table "tracks", force: :cascade do |t|
     t.text     "content",    null: false
