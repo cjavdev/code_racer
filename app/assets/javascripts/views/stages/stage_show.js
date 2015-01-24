@@ -6,6 +6,14 @@ CodeRacer.Views.StageShow = Backbone.View.extend({
     });
   },
 
+  events: {
+    'click .start-race': 'startRace'
+  },
+
+  startRace: function () {
+    console.log('Start Race!');
+  },
+
   template: JST['stages/show'],
 
   renderRacers: function () {

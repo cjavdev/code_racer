@@ -24,5 +24,21 @@ module Api
 
       render :show
     end
+
+    def start
+      @registration = RaceRegistration.new(current_user, random_track)
+      @registration.save
+      @stage = Stage.find(params[:id])
+
+      Pusher["stage_#{ @stage.token }"].trigger('start_race', {
+        track_id: @registration.track.id
+      })
+    end
+
+    private
+
+    def random_track
+      Track.random
+    end
   end
 end

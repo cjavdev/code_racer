@@ -5,6 +5,13 @@ CodeRacer.Models.Stage = Backbone.Model.extend({
     return window.location.origin + '/#/staging/' + this.get('token');
   },
 
+  startRace: function () {
+    $.ajax({
+      url: this.url() + '/start'
+      type: 'POST'
+    });
+  },
+
   bindEvents: function () {
     this.channel.bind('add_racer', function (data) {
       this.racers().add(data);
