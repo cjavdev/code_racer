@@ -3,7 +3,7 @@ window.CodeRacer = {
   Collections: {},
   Views: {},
   Routers: {},
-  initialize: function() {
+  initialize: function () {
     var router = new CodeRacer.Routers.Router({
       $rootEl: $('#main')
     });
@@ -25,4 +25,3 @@ Pusher.log = function (message) {
 };
 
 CodeRacer.pusher = new Pusher('ec38d09303a657c3fd5e');
-

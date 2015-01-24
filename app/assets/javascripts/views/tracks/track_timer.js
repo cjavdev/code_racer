@@ -8,7 +8,7 @@ CodeRacer.Views.TrackTimer = Backbone.View.extend({
   },
 
   renderStats: function () {
-    if(this.timer.countDown) {
+    if (this.timer.countDown) {
       this.$('.wpm').html("Get Ready!");
     } else {
       this.$('.wpm').html("<span class='label label-success'>" + this.wpm() + "</span> WPM");
@@ -23,7 +23,7 @@ CodeRacer.Views.TrackTimer = Backbone.View.extend({
   template: JST['tracks/timer'],
 
   wpm: function () {
-    if(this.timer.countDown === false && this.timer.seconds > 1) {
+    if (this.timer.countDown === false && this.timer.seconds > 1) {
       return (this.track.currentWordCount() / (this.timer.seconds / 60)).toFixed(2);
     }
     return 0;

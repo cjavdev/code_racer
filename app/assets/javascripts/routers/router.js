@@ -12,7 +12,9 @@ CodeRacer.Routers.Router = Backbone.Router.extend({
   },
 
   edit: function (id) {
-    var track = new CodeRacer.Models.Track({ id: id });
+    var track = new CodeRacer.Models.Track({
+      id: id
+    });
     track.fetch();
 
     var view = new CodeRacer.Views.TrackForm({
@@ -41,7 +43,9 @@ CodeRacer.Routers.Router = Backbone.Router.extend({
   },
 
   track: function (id) {
-    var track = new CodeRacer.Models.Track({ id: id });
+    var track = new CodeRacer.Models.Track({
+      id: id
+    });
     track.fetch();
 
     var view = new CodeRacer.Views.TrackDetail({

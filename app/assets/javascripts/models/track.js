@@ -54,7 +54,7 @@ CodeRacer.Models.Track = Backbone.Model.extend({
   },
 
   topDog: function () {
-    if(!this._topDog) {
+    if (!this._topDog) {
       this._topDog = new CodeRacer.Models.User();
     }
 
@@ -62,7 +62,7 @@ CodeRacer.Models.Track = Backbone.Model.extend({
   },
 
   leaders: function () {
-    if(!this._leaders) {
+    if (!this._leaders) {
       this._leaders = new CodeRacer.Collections.Users();
     }
     return this._leaders;
@@ -76,7 +76,9 @@ CodeRacer.Models.Track = Backbone.Model.extend({
       this.topDog().set(data.top_dog);
     }
     if (data.leaders) {
-      this.leaders().set(data.leaders, { parse: true });
+      this.leaders().set(data.leaders, {
+        parse: true
+      });
     }
     return data;
   },
@@ -93,8 +95,10 @@ CodeRacer.Models.Track = Backbone.Model.extend({
       }
     });
 
-    if(over) {
-      this.car.set({ wpm: wpm });
+    if (over) {
+      this.car.set({
+        wpm: wpm
+      });
       this.car.save();
       this.fetch();
     }
@@ -111,7 +115,9 @@ CodeRacer.Models.Track = Backbone.Model.extend({
   },
 
   join: function (timer) {
-    this.car = new CodeRacer.Models.Car({ track_id: this.id });
+    this.car = new CodeRacer.Models.Car({
+      track_id: this.id
+    });
     this.car.collection = this.cars();
     this.car.save().then(function () {
       this.cars().add(this.car);

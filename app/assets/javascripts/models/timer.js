@@ -7,7 +7,7 @@ CodeRacer.Models.Timer = Backbone.Model.extend({
 
   startAt: function (time) {
     this.startTime = time;
-    if(this.startTime > new Date()) {
+    if (this.startTime > new Date()) {
       this.countDown = true;
       this.seconds = Math.abs((new Date() - time) / 1000);
     } else {

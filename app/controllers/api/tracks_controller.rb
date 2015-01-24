@@ -25,7 +25,7 @@ module Api
       if @track.update(track_params)
         render json: @track
       else
-        render json: @track.errors.full_messages, status: :unprocessable_entity
+        render json: @track.errors.full_messages, status: 422
       end
     end
 

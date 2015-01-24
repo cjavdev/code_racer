@@ -24,6 +24,7 @@
 //= require_tree ./routers
 //= require_tree .
 
+// startsWith polyfill
 if (!String.prototype.startsWith) {
   Object.defineProperty(String.prototype, 'startsWith', {
     enumerable: false,
@@ -35,4 +36,3 @@ if (!String.prototype.startsWith) {
     }
   });
 }
-

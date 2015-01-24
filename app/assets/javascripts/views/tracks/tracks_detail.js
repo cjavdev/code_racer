@@ -53,7 +53,7 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
       } else {
         $input.removeClass('wrong');
       }
-      if(this.model.moreWords()) {
+      if (this.model.moreWords()) {
         this.renderContent();
       } else {
         this.gameOver();
