@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
       <span class="sr-only">Toggle navigation</span>
@@ -14,8 +14,8 @@
     </ul>
     <form action="/session" class="navbar-form navbar-right" role="search" method="POST">
       <input type="hidden" name="_method" value="DELETE" />
-      <button type="submit" class="btn btn-info btn-sm">
-        <i class="fa fa-sign-out"></i>Leave
+      <button type="submit" class="btn btn-info">
+        <i class="fa fa-sign-out"></i>Not <%= window.CURRENT_RACER.nickname %>?
       </button>
     </form>
   </div>
