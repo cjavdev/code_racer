@@ -15,6 +15,7 @@ CodeRacer.Routers.Router = Backbone.Router.extend({
   staging: function (token) {
     var stage = new CodeRacer.Models.Stage();
     if (token) {
+      stage.set({ token: token, id: token });
       stage.fetch({
         data: {
           token: token
