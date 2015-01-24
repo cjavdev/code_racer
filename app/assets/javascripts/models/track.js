@@ -63,7 +63,9 @@ CodeRacer.Models.Track = Backbone.Model.extend({
 
   leaders: function () {
     if (!this._leaders) {
-      this._leaders = new CodeRacer.Collections.Users();
+      this._leaders = new CodeRacer.Collections.Users([], {
+        track: this
+      });
     }
     return this._leaders;
   },
@@ -100,7 +102,7 @@ CodeRacer.Models.Track = Backbone.Model.extend({
         wpm: wpm
       });
       this.car.save();
-      this.fetch();
+      this.leaders().fetch();
     }
   },
 

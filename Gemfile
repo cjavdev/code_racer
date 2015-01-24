@@ -23,10 +23,10 @@ gem 'compass-rails'
 gem 'pusher_rails'
 gem 'serialize_json-rails'
 
-group :development do
-  gem 'better_errors'
-  gem 'binding_of_caller'
-end
+#group :development do
+#  gem 'better_errors'
+#  gem 'binding_of_caller'
+#end
 
 group :development, :test do
   gem 'byebug'
@@ -36,6 +36,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'annotate'
+  gem 'teaspoon'
 end
 
 group :test do

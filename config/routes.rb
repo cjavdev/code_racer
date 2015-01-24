@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resource :session, only: [:destroy]
 
   namespace :api, defaults: { format: :json } do
-    resources :tracks, only: [:index, :show, :create, :update]
+    resources :tracks, only: [:index, :show, :create, :update] do
+      resources :leaders, only: [:index]
+    end
     resources :race_entries, only: [:create, :update]
     resource :wpm, only: [:create]
   end

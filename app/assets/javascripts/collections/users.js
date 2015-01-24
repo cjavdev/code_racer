@@ -1,3 +1,13 @@
 CodeRacer.Collections.Users = Backbone.Collection.extend({
-  model: CodeRacer.Models.User
+  model: CodeRacer.Models.User,
+
+  initialize: function (models, options) {
+    if(options.track) {
+      this.track = options.track
+    }
+  },
+
+  url: function () {
+    return this.track.url() + '/leaders';
+  }
 });
