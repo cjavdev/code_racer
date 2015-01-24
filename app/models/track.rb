@@ -16,6 +16,13 @@ class Track < ActiveRecord::Base
   has_many :races
   has_many :race_entries, through: :races
 
+  def leading_entries
+    race_entries
+      .where.not(wpm: nil)
+      .order(wpm: :desc)
+      .limit(10)
+  end
+
   def current_race
     races.open_for_registration.first
   end

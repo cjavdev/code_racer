@@ -1,0 +1,10 @@
+<h5>Times To Beat</h5>
+
+<div class="list-group">
+  <% leaders.each(function (leader) { %>
+    <div class="list-group-item">
+      <%= leader.escape("nickname") %>
+      <span class="badge"><%= leader.get("wpm") %></span>
+    </div>
+  <% }) %>
+</div>

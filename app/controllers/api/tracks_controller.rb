@@ -8,7 +8,6 @@ module Api
 
     def show
       @track = Track.find(params[:id])
-      render json: @track
     end
 
     def create

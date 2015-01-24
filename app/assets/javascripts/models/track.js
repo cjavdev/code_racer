@@ -61,12 +61,22 @@ CodeRacer.Models.Track = Backbone.Model.extend({
     return this._topDog;
   },
 
+  leaders: function () {
+    if(!this._leaders) {
+      this._leaders = new CodeRacer.Collections.Users();
+    }
+    return this._leaders;
+  },
+
   parse: function (data) {
     if (data.content) {
       this.wordChecker().setContent(data.content);
     }
     if (data.top_dog) {
       this.topDog().set(data.top_dog);
+    }
+    if (data.leaders) {
+      this.leaders().set(data.leaders, { parse: true });
     }
     return data;
   },
@@ -86,6 +96,7 @@ CodeRacer.Models.Track = Backbone.Model.extend({
     if(over) {
       this.car.set({ wpm: wpm });
       this.car.save();
+      this.fetch();
     }
   },
 

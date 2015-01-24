@@ -15,4 +15,8 @@ class RaceEntry < ActiveRecord::Base
   validates :user, uniqueness: { scope: :race }
   belongs_to :race
   belongs_to :user
+
+  def nickname
+    user.nickname
+  end
 end

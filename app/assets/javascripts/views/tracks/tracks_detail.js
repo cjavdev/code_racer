@@ -11,6 +11,10 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
       track: this.model
     });
     this.listenTo(this.timer, 'go', this.startRace);
+
+    this.leaderBoardView = new CodeRacer.Views.LeaderBoard({
+      collection: this.model.leaders()
+    });
   },
 
   renderCars: function () {
@@ -71,6 +75,10 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
     this.$('.content').html(this.model.content());
   },
 
+  renderLeaderBoard: function () {
+    this.$('.leaderboard').html(this.leaderBoardView.render().$el);
+  },
+
   render: function () {
     var content = this.template({
       track: this.model
@@ -79,6 +87,7 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
     this.$('input').prop('disabled', true);
     this.renderTimer();
     this.renderCars();
+    this.renderLeaderBoard();
     return this;
   },
 });
