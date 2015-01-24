@@ -3,11 +3,11 @@ module Api
     before_action :require_admin!, only: [:create, :update]
 
     def index
-      @tracks = Track.all
+      @tracks = Track.includes(race_entries: :user)
     end
 
     def show
-      @track = Track.find(params[:id])
+      @track = Track.includes(race_entries: :user).find(params[:id])
     end
 
     def create

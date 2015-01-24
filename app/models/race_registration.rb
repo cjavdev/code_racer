@@ -50,7 +50,7 @@ class RaceRegistration
   end
 
   def current_race
-    track.current_race
+    @_current_race ||= track.current_race
   end
 
   private
