@@ -15,6 +15,7 @@
 //= require underscore
 //= require backbone
 //= require moment
+//= require pusher
 //= require serialize_json
 //= require code_racer
 //= require_tree ../templates
