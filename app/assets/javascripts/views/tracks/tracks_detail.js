@@ -1,11 +1,17 @@
+/*globals CodeRacer, Backbone, _, JST */
 CodeRacer.Views.TrackDetail = Backbone.View.extend({
   initialize: function (options) {
     this.race = options.race;
-
     this.listenTo(this.race, 'sync', this.render);
     this.listenTo(this.race, 'go', this.startRace);
-
+    this.listenTo(this.race, 'next', this.advanceWord);
+    this.listenTo(this.race, 'over', this.gameOver);
     this.initializeSubviews();
+  },
+
+  advanceWord: function () {
+    this.renderContent();
+    this.clearInput();
   },
 
   initializeSubviews: function () {
@@ -47,20 +53,13 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
     if (event.keyCode === 16) {
       return;
     }
+
     var $input = this.$('input');
+
     setTimeout(function () {
       var typed = $input.val();
-
-      if (event.keyCode === 32) {
-        this.handleWord(typed);
-      }
-
-      this.validateInput(typed);
-      this.renderContent();
-
-      if (!this.model.moreWords()) {
-        this.gameOver();
-      }
+      this.handleWord(typed);
+      this.validateInput();
     }.bind(this), 0);
   },
 
@@ -68,27 +67,22 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
     this.$('input').val('');
   },
 
-  validateInput: function(word) {
-    if (!this.model.checkWord(word)) {
-      this.$('input').addClass('wrong');
-    } else {
+  validateInput: function() {
+    if (this.race.valid()) {
       this.$('input').removeClass('wrong');
+    } else {
+      this.$('input').addClass('wrong');
     }
   },
 
   handleWord: function (word) {
-    if (this.model.wordComplete(word)) {
-      this.clearInput();
-      this.model.notify(this.timerView.wpm(), this.model.percentComplete());
-    }
+    return this.race.checkWord(word);
   },
 
   gameOver: function () {
-    this.model.notify(this.timerView.wpm(), this.model.percentComplete(), true);
-    this.timer.stop();
     this.$('input').prop('disabled', true);
     this.gameOverView = new CodeRacer.Views.TrackOver({
-      wpm: this.timerView.wpm()
+      wpm: this.race.wpm()
     });
     this.$el.append(this.gameOverView.render().$el);
   },

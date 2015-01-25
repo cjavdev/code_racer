@@ -1,14 +1,13 @@
 /*globals CodeRacer, _, Backbone */
-
 CodeRacer.Models.Race = function (track, timer, wordChecker) {
   this.track = track;
   this.timer = timer;
   this.wordChecker = wordChecker;
+  this._valid = true;
 
   this.listenTo(track, 'change:content', function () {
     this.wordChecker.setContent(track.get('content'));
   });
-
   this.forwardEvents();
 
   track.fetch();
@@ -24,6 +23,20 @@ CodeRacer.Models.Race.prototype = {
     this.listenTo(this.timer, 'go', function () {
       this.trigger('go');
     });
+
+    this.listenTo(this.wordChecker, 'over', function () {
+      this.over();
+    });
+
+    this.listenTo(this.wordChecker, 'next', function () {
+      this.next();
+    });
+  },
+
+  over: function () {
+    this.track.notify(this.wpm(), this.wordChecker.percentComplete(), true);
+    this.timer.stop();
+    this.trigger('over');
   },
 
   cars: function () {
@@ -38,8 +51,17 @@ CodeRacer.Models.Race.prototype = {
     return this.wordChecker.render();
   },
 
+  checkWord: function (word) {
+    this._valid = this.wordChecker.checkWord(word);
+    return this._valid;
+  },
+
+  valid: function () {
+    return this._valid;
+  },
+
   wpm: function () {
-    if (this.timer.countDown === false && this.timer.seconds > 1) {
+    if (this.started() && this.timer.seconds > 1) {
       return (this.wordChecker.currentWordCount() / (this.timer.seconds / 60)).toFixed(2);
     }
     return 0;
@@ -47,6 +69,15 @@ CodeRacer.Models.Race.prototype = {
 
   time: function () {
     return this.timer.roundSeconds();
+  },
+
+  started: function () {
+    return !this.timer.countDown;
+  },
+
+  next: function () {
+    this.track.notify(this.wpm(), this.wordChecker.percentComplete());
+    this.trigger('next');
   },
 };
 

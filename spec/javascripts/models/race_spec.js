@@ -75,4 +75,12 @@ describe("Race", function () {
     timer.seconds = 5.5;
     expect(race.time()).toEqual(5);
   });
+
+  it('#started, returns true if timer is counting up', function () {
+    race = new CodeRacer.Models.Race(track, timer, wordChecker);
+    expect(race.started()).toEqual(false);
+    timer.countDown = false;
+    expect(race.started()).toEqual(true);
+  });
+
 });

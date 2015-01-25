@@ -38,6 +38,8 @@ CodeRacer.Models.WordChecker.prototype = {
 
     if (this._onLastWord() && word === this.currentWord()) {
       this.currentIndex++;
+      this.trigger('next');
+      this.trigger('over');
       return true;
     }
 
@@ -71,6 +73,7 @@ CodeRacer.Models.WordChecker.prototype = {
   _wordComplete: function (word) {
     if (this._currentPaddedWord() === word) {
       this.currentIndex++;
+      this.trigger('next');
       return true;
     }
     return false;
@@ -80,3 +83,5 @@ CodeRacer.Models.WordChecker.prototype = {
     return this.currentWord() + ' ';
   },
 };
+
+_.extend(CodeRacer.Models.WordChecker.prototype, Backbone.Events);

@@ -22,16 +22,14 @@ CodeRacer.Views.TrackTimer = Backbone.View.extend({
 
   render: function () {
     var content = this.template({
-      time: this.race.time(),
-      timer: this.race.timer,
-      wpm: this.race.wpm()
+      time: this.race.time()
     });
     this.$el.html(content);
     return this;
   },
 
   _renderWpm: function () {
-    if (this.timer.countDown) {
+    if(!this.race.started()) {
       this.$('.wpm').html("Get Ready!");
     } else {
       this.$('.wpm').html("<span class='label label-success'>" + this.race.wpm() + "</span> WPM");
