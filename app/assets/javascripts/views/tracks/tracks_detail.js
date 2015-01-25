@@ -1,19 +1,26 @@
 CodeRacer.Views.TrackDetail = Backbone.View.extend({
-  initialize: function () {
-    this.listenTo(this.model, 'sync', this.render);
-    this.timer = new CodeRacer.Models.Timer();
-    this.model.join(this.timer);
+  initialize: function (options) {
+    this.race = options.race;
+
+    this.listenTo(this.race, 'sync', this.render);
+    this.listenTo(this.race, 'go', this.startRace);
+
+    this.initializeSubviews();
+  },
+
+  initializeSubviews: function () {
     this.carsIndex = new CodeRacer.Views.CarsIndex({
-      collection: this.model.cars()
+      collection: this.race.cars()
     });
+
     this.timerView = new CodeRacer.Views.TrackTimer({
-      timer: this.timer,
+      race: this.race,
+      timer: this.race.timer,
       track: this.model
     });
-    this.listenTo(this.timer, 'go', this.startRace);
 
     this.leaderBoardView = new CodeRacer.Views.LeaderBoard({
-      collection: this.model.leaders()
+      collection: this.race.leaders()
     });
   },
 
@@ -42,23 +49,38 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
     }
     var $input = this.$('input');
     setTimeout(function () {
+      var typed = $input.val();
+
       if (event.keyCode === 32) {
-        if (this.model.wordComplete($input.val())) {
-          $input.val('');
-          this.model.notify(this.timerView.wpm(), this.model.percentComplete());
-        }
+        this.handleWord(typed);
       }
-      if (!this.model.checkWord($input.val())) {
-        $input.addClass('wrong');
-      } else {
-        $input.removeClass('wrong');
-      }
-      if (this.model.moreWords()) {
-        this.renderContent();
-      } else {
+
+      this.validateInput(typed);
+      this.renderContent();
+
+      if (!this.model.moreWords()) {
         this.gameOver();
       }
     }.bind(this), 0);
+  },
+
+  clearInput: function () {
+    this.$('input').val('');
+  },
+
+  validateInput: function(word) {
+    if (!this.model.checkWord(word)) {
+      this.$('input').addClass('wrong');
+    } else {
+      this.$('input').removeClass('wrong');
+    }
+  },
+
+  handleWord: function (word) {
+    if (this.model.wordComplete(word)) {
+      this.clearInput();
+      this.model.notify(this.timerView.wpm(), this.model.percentComplete());
+    }
   },
 
   gameOver: function () {
@@ -72,7 +94,7 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
   },
 
   renderContent: function () {
-    this.$('.content').html(this.model.content());
+    this.$('.content').html(this.race.content());
   },
 
   renderLeaderBoard: function () {
@@ -80,11 +102,10 @@ CodeRacer.Views.TrackDetail = Backbone.View.extend({
   },
 
   render: function () {
-    var content = this.template({
-      track: this.model
-    });
+    var content = this.template();
     this.$el.html(content);
     this.$('input').prop('disabled', true);
+    this.renderContent();
     this.renderTimer();
     this.renderCars();
     this.renderLeaderBoard();

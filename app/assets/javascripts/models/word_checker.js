@@ -1,76 +1,82 @@
-(function () {
-  var WordChecker = CodeRacer.Models.WordChecker = function (content) {
-    this.setContent(content);
-    this.currentIndex = 0;
-  }
+CodeRacer.Models.WordChecker = function () {
+  this.currentIndex = 0;
+  this.words = [];
+};
 
-  WordChecker.prototype = {
-    setContent: function (content) {
-      this.words = this.splitIntoWords(content || "");
-    },
+CodeRacer.Models.WordChecker.prototype = {
+  setContent: function (content) {
+    this.words = this._splitIntoWords(content || "");
+  },
 
-    splitIntoWords: function (content) {
-      return content.split(" ");
-    },
+  currentWord: function () {
+    return this.words[this.currentIndex];
+  },
 
-    currentWord: function () {
-      return this.words[this.currentIndex];
-    },
-
-    currentPaddedWord: function () {
-      return this.currentWord() + ' ';
-    },
-
-    wordComplete: function (word) {
-      if (this.currentPaddedWord() === word) {
-        this.currentIndex++;
-        return true;
+  render: function () {
+    var i, result = [];
+    for (i = 0; i < this.words.length; i++) {
+      if (this.currentIndex === i) {
+        result.push("<strong>");
       }
-      return false;
-    },
-
-    render: function () {
-      var i, result = [];
-      for (i = 0; i < this.words.length; i++) {
-        if (this.currentIndex === i) {
-          result.push("<strong>");
-        }
-        result.push(this.words[i]);
-        if (this.currentIndex === i) {
-          result.push("</strong>");
-        }
-        result.push(" ");
+      result.push(this.words[i]);
+      if (this.currentIndex === i) {
+        result.push("</strong>");
       }
-      return result.join("");
-    },
+      result.push(" ");
+    }
+    return result.join("").trim();
+  },
 
-    currentWordCount: function () {
-      return this.currentIndex;
-    },
+  currentWordCount: function () {
+    return this.currentIndex;
+  },
 
-    checkWord: function (word) {
-      if (this.currentIndex === this.words.length - 1 && word === this.currentWord()) {
-        this.currentIndex++;
-        return true;
-      }
+  checkWord: function (word) {
+    if(word.endsWith(" ")) {
+      return this._wordComplete(word);
+    }
 
-      if (this.currentWord().startsWith(word)) {
-        return true;
-      }
+    if (this._onLastWord() && word === this.currentWord()) {
+      this.currentIndex++;
+      return true;
+    }
 
-      return false;
-    },
+    if (this.currentWord().startsWith(word)) {
+      return true;
+    }
 
-    wordCount: function () {
-      return this.words.length;
-    },
+    return false;
+  },
 
-    moreWords: function () {
-      return this.currentIndex !== this.words.length;
-    },
+  wordCount: function () {
+    return this.words.length;
+  },
 
-    percentComplete: function () {
-      return parseInt(100 * (this.currentIndex / this.words.length));
-    },
-  };
-}());
+  moreWords: function () {
+    return this.currentIndex < this.words.length;
+  },
+
+  percentComplete: function () {
+    return parseInt(100 * (this.currentIndex / this.words.length), 10);
+  },
+
+  _splitIntoWords: function (content) {
+    return content.split(/\s+/);
+  },
+
+  _onLastWord: function () {
+    return this.currentIndex === this.words.length - 1;
+  },
+
+  _wordComplete: function (word) {
+    if (this._currentPaddedWord() === word) {
+      this.currentIndex++;
+      return true;
+    }
+    return false;
+  },
+
+  _currentPaddedWord: function () {
+    return this.currentWord() + ' ';
+  },
+};

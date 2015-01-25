@@ -67,10 +67,13 @@ CodeRacer.Routers.Router = Backbone.Router.extend({
     var track = new CodeRacer.Models.Track({
       id: id
     });
-    track.fetch();
+    var timer = new CodeRacer.Models.Timer();
+    var wordChecker = new CodeRacer.Models.WordChecker();
+    var race = new CodeRacer.Models.Race(track, timer, wordChecker);
 
     var view = new CodeRacer.Views.TrackDetail({
-      model: track
+      model: track,
+      race: race
     });
 
     this._swapView(view);
