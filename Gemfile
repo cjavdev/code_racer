@@ -23,11 +23,6 @@ gem 'compass-rails'
 gem 'pusher_rails'
 gem 'serialize_json-rails'
 
-#group :development do
-#  gem 'better_errors'
-#  gem 'binding_of_caller'
-#end
-
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
