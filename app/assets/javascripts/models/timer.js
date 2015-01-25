@@ -1,3 +1,4 @@
+/*global CodeRacer, Backbone */
 CodeRacer.Models.Timer = Backbone.Model.extend({
   initialize: function () {
     this.seconds = 10;

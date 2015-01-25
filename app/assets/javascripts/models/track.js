@@ -1,41 +1,6 @@
+/*global CodeRacer, Backbone, $ */
 CodeRacer.Models.Track = Backbone.Model.extend({
   urlRoot: '/api/tracks',
-
-  currentWordCount: function () {
-    return this.wordChecker().currentWordCount();
-  },
-
-  checkWord: function (word) {
-    return this.wordChecker().checkWord(word);
-  },
-
-  checkLetter: function (letter) {
-    return this.wordChecker().checkLetter(letter);
-  },
-
-  wordComplete: function (word) {
-    return this.wordChecker().wordComplete(word);
-  },
-
-  backSpace: function () {
-    return this.wordChecker().backSpace();
-  },
-
-  content: function () {
-    return this.wordChecker().render();
-  },
-
-  moreWords: function () {
-    return this.wordChecker().moreWords();
-  },
-
-  wordCount: function () {
-    return this.wordChecker().wordCount();
-  },
-
-  percentComplete: function () {
-    return this.wordChecker().percentComplete();
-  },
 
   cars: function () {
     if (!this._cars) {
@@ -44,13 +9,6 @@ CodeRacer.Models.Track = Backbone.Model.extend({
       });
     }
     return this._cars;
-  },
-
-  wordChecker: function () {
-    if (!this._wordChecker) {
-      this._wordChecker = new CodeRacer.Models.WordChecker(this.get('content'));
-    }
-    return this._wordChecker;
   },
 
   topDog: function () {
@@ -71,12 +29,10 @@ CodeRacer.Models.Track = Backbone.Model.extend({
   },
 
   parse: function (data) {
-    if (data.content) {
-      this.wordChecker().setContent(data.content);
-    }
     if (data.top_dog) {
       this.topDog().set(data.top_dog);
     }
+
     if (data.leaders) {
       this.leaders().set(data.leaders, {
         parse: true
@@ -108,7 +64,7 @@ CodeRacer.Models.Track = Backbone.Model.extend({
 
   bindTrackEvents: function () {
     this.channel.bind('add_car', function (otherCar) {
-      this.cars().add(otherCar)
+      this.cars().add(otherCar);
     }.bind(this));
     this.channel.bind('update_speed', function (speed) {
       this.cars().get(speed.id).set('wpm', speed.wpm);

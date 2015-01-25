@@ -1,3 +1,4 @@
+/*globals CodeRacer, Backbone, _, JST, window, $ */
 CodeRacer.Models.Stage = Backbone.Model.extend({
   urlRoot: '/api/stages',
 
@@ -34,7 +35,7 @@ CodeRacer.Models.Stage = Backbone.Model.extend({
     if (data.racers) {
       this.racers().set(data.racers, {
         parse: true
-      })
+      });
     }
     this.channel = CodeRacer.pusher.subscribe('stage_' + data.token);
     this.bindEvents();
