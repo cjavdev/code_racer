@@ -1,3 +1,4 @@
+/*globals CodeRacer, Backbone, _ */
 CodeRacer.Views.StageRacers = Backbone.View.extend({
   initialize: function () {
     this._racerViews = [];

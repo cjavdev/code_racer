@@ -1,3 +1,4 @@
+/*globals CodeRacer, Backbone, _ */
 CodeRacer.Models.WordChecker = function () {
   this.currentIndex = 0;
   this.words = [];

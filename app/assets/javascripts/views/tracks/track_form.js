@@ -1,3 +1,4 @@
+/*globals CodeRacer, Backbone, JST */
 CodeRacer.Views.TrackForm = Backbone.View.extend({
   initialize: function () {
     this.listenTo(this.model, 'sync', this.render);
@@ -6,6 +7,7 @@ CodeRacer.Views.TrackForm = Backbone.View.extend({
   tagName: "form",
   template: JST['tracks/form'],
   className: "form",
+
   attributes: {
     role: "form"
   },

@@ -1,3 +1,4 @@
+/*globals CodeRacer, Backbone, JST, FB, window */
 CodeRacer.Views.TrackOver = Backbone.View.extend({
   initialize: function (options) {
     this.wpm = options.wpm;

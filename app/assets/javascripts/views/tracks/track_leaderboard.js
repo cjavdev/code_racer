@@ -1,3 +1,4 @@
+/*globals CodeRacer, Backbone, JST */
 CodeRacer.Views.LeaderBoard = Backbone.View.extend({
   initialize: function () {
     this.listenTo(this.collection, 'sync', this.render);

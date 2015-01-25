@@ -1,3 +1,4 @@
+/*globals window, Pusher, Backbone, CodeRacer, $ */
 window.CodeRacer = {
   Models: {},
   Collections: {},
@@ -16,7 +17,7 @@ window.CodeRacer = {
 
     Backbone.history.start();
   }
-}
+};
 
 Pusher.log = function (message) {
   if (window.console && window.console.log) {

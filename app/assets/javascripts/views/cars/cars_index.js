@@ -1,3 +1,4 @@
+/*globals CodeRacer, Backbone, _, JST */
 CodeRacer.Views.CarsIndex = Backbone.View.extend({
   initialize: function () {
     this._carViews = [];
@@ -11,22 +12,18 @@ CodeRacer.Views.CarsIndex = Backbone.View.extend({
       model: car
     });
     this._carViews.push(view);
-    this.$('div.cars').append(view.render().$el);
+    this.$el.append(view.render().$el);
   },
 
   renderCars: function () {
-    this.$('div.cars').empty();
+    this.$el.empty();
     _(this._carViews).each(function (v) {
-      this.$('div.cars').append(v.$el);
+      this.$el.append(v.$el);
       v.delegateEvents();
     }, this);
   },
 
-  template: JST['cars/index'],
-
   render: function () {
-    var content = this.template();
-    this.$el.html(content);
     this.renderCars();
     return this;
   },

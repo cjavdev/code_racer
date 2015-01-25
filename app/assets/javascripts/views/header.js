@@ -1,3 +1,4 @@
+/*globals CodeRacer, Backbone, JST */
 CodeRacer.Views.Header = Backbone.View.extend({
   template: JST['header'],
 

@@ -1,3 +1,4 @@
+/*globals CodeRacer, Backbone, JST */
 CodeRacer.Views.StageShow = Backbone.View.extend({
   initialize: function () {
     this.listenTo(this.model, 'sync', this.render);
