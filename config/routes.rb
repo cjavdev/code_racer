@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resource :notification, only: [:show, :destroy]
 
   namespace :api, defaults: { format: :json } do
+    resource :setting, only: [:update]
     resources :stats, only: [:index]
     resources :tracks, only: [:index, :show, :create, :update] do
       resources :leaders, only: [:index]

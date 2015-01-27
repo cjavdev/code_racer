@@ -1,1 +1,3 @@
-CodeRacer.Models.User = Backbone.Model.extend({ });
+CodeRacer.Models.User = Backbone.Model.extend({
+  url: '/api/setting'
+});
