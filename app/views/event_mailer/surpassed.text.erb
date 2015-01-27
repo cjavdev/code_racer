@@ -1,3 +1,6 @@
-EventMailer#surpassed
+Awe shucks!
 
-<%= @greeting %>, find me in app/views/event_mailer/surpassed.text.erb
+<%= @leader.nickname %> beat your score on <%= @entry.race.track.title %>!
+They got <%= @entry.wpm %>. I think you can better them! <%= root_url %>.
+
+Don't want notifications? Go here: <%= notification_url %>.
