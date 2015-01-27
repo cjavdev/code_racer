@@ -33,6 +33,7 @@ RSpec.describe NewLeaderNotification do
       user = create(:user, provider: "twitter")
       user_notification = NewLeaderNotification.new(user)
       user_notification.deliver
+      expect(false).to eq(true)
     end
   end
 
