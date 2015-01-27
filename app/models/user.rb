@@ -25,6 +25,15 @@ class User < ActiveRecord::Base
     self.session_token ||= SecureRandom.hex
   end
 
+  def stats
+    race_entries
+      .where
+      .not(wpm: nil)
+      .where('wpm > ?', 10)
+      .order(:created_at)
+      .pluck(:created_at, :wpm)
+  end
+
   def self.find_or_create_from_auth_hash(auth_hash, provider)
     u = User.find_by(uid: auth_hash.fetch(:uid), provider: provider)
     return u if u
