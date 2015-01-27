@@ -21,6 +21,7 @@ class RaceEntry < ActiveRecord::Base
     return true if wpm.nil? || wpm.between?(1, 255)
     if wpm > 225
       user.cheater = true
+      user.session_token = SecureRandom.hex
       user.save!
       EventMailer.cheater(user).deliver_later
       errors.add(:wpm, 'over maximum wpm')
