@@ -14,7 +14,14 @@ module Api
     def update
       @entry = current_user.race_entries.find_by(race_id: params[:race_id])
       @entry.wpm = params[:wpm]
-      @entry.save
+
+      if @entry.save
+        Instigator.new(@entry).instigate!
+      end
+
+      # if this wpm is the top wpm, and the current user is not the
+      # top dog, notify the current user of taking the lead,
+      # notify the number 2 they were passed.
       render json: @entry
     end
 
