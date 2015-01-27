@@ -10,6 +10,6 @@
 
 FactoryGirl.define do
   factory :race do
-    track_id 1
+    track
   end
 end

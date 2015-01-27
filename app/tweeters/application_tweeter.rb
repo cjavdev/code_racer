@@ -21,7 +21,7 @@ class ApplicationTweeter
   def tweet(options)
     to = options.fetch(:to)
     body = options.fetch(:body)
-    message = "/cc #{ to } #{ body }"
+    message = "/cc @#{ to } #{ body }"
 
     if Rails.env.production? || Rails.env.development?
       client.update(message)
