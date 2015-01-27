@@ -15,5 +15,6 @@ FactoryGirl.define do
     race_id 1
     user
     wpm 1.5
+    race
   end
 end
