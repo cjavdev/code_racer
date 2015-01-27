@@ -18,7 +18,7 @@ class TopEntryNotification
     return unless gets_notifications?(leader)
 
     if has_email_provider?(leader)
-      EventMailer.new_leader(leader).deliver_later
+      EventMailer.new_leader(leader, entry).deliver_later
     end
 
     if is_twitter_user?(leader)
@@ -30,11 +30,11 @@ class TopEntryNotification
     return unless gets_notifications?(lagger)
 
     if has_email_provider?(lagger)
-      EventMailer.new_leader(lagger).deliver_later
+      EventMailer.surpassed(leader, lagger, entry).deliver_later
     end
 
     if is_twitter_user?(lagger)
-      EventTweeter.new.new_leader(lagger, entry)
+      EventTweeter.new.surpassed(leader, lagger, entry)
     end
   end
 

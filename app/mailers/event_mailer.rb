@@ -1,27 +1,20 @@
 class EventMailer < ApplicationMailer
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.event_mailer.new_leader.subject
-  #
-  def new_leader(leader)
-    @greeting = "Hi"
+  def new_leader(leader, entry)
+    @leader = leader
+    @entry = entry
 
-    mail to: leader.email
+    mail to: leader.email, subject: "#{ leader.nickname } Takes the lead!"
   end
 
   def cheater(user)
     mail to: user.email
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.event_mailer.surpassed.subject
-  #
-  def surpassed
-    @greeting = "Hi"
+  def surpassed(leader, lagger, entry)
+    @leader = leader
+    @lagger = lagger
+    @entry = entry
 
-    mail to: "to@example.org"
+    mail to: lagger.email, subject: "Taste that dust?"
   end
 end

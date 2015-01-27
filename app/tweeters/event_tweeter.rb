@@ -2,7 +2,7 @@ class EventTweeter < ApplicationTweeter
   def new_leader(leader, entry)
     tweet(
       to: leader.nickname,
-      body: "Awesome! #{ entry.wpm } WPM puts you at the top of #{ entry.race.track.title }"
+      body: "Awesome! #{ entry.wpm } WPM puts you at the top of #{ entry.race.track.title } http://goo.gl/hbwfvb"
     )
   end
 
@@ -23,7 +23,7 @@ class EventTweeter < ApplicationTweeter
 
     tweet(
       to: old.nickname,
-      body: "Awe dang! #{ name } beat your score on #{ entry.race.track.title } /w #{ entry.wpm }. You can catch'em!"
+      body: "Awe dang! #{ name } beat your score on #{ entry.race.track.title } /w #{ entry.wpm }. You can catch'em! http://goo.gl/hbwfvb"
     )
   end
 end

@@ -9,7 +9,7 @@ RSpec.describe Instigator do
     it 'notifies the current user that they are the new champ' do
       instigator = Instigator.new(race_entry)
 
-      expect(instigator).to receive(:notify_new_champ!)
+      expect(instigator).to receive(:notify!)
       instigator.instigate!
     end
   end
@@ -21,17 +21,17 @@ RSpec.describe Instigator do
 
       instigator = Instigator.new(race_entry2)
 
-      expect(instigator).to receive(:notify_new_champ!)
+      expect(instigator).to receive(:notify!)
       instigator.instigate!
     end
 
     it 'notifies the old champ that their crown has been stolen' do
-       race2 = create(:race, track: track)
+      race2 = create(:race, track: track)
       race_entry2 = create(:race_entry, race: race2, wpm: 11)
 
       instigator = Instigator.new(race_entry2)
 
-      expect(instigator).to receive(:notify_old_champ!)
+      expect(instigator).to receive(:notify!)
       instigator.instigate!
     end
 
@@ -40,7 +40,7 @@ RSpec.describe Instigator do
       race_entry2 = create(:race_entry, race: race2, wpm: 9)
 
       instigator = Instigator.new(race_entry2)
-      expect(instigator).not_to receive(:notify_new_champ!)
+      expect(instigator).not_to receive(:notify!)
       instigator.instigate!
     end
   end

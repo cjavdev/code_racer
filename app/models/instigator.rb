@@ -5,28 +5,31 @@ class Instigator
     @race_entry = race_entry
   end
 
-  def notify_new_champ!
-    TopEntryNotification.new(race_entry.user, other race_entry)
-  end
-
-  def notify_old_champ!
-
+  def notify!(lagger = nil)
+    TopEntryNotification.new(
+      leader: race_entry.user,
+      lagger: lagger,
+      entry: race_entry
+    ).deliver
   end
 
   def instigate!
     if other_entries.empty?
-      notify_new_champ!
+      notify!
       return
     end
 
     if beats_existing_leader?
-      notify_old_champ!
-      notify_new_champ!
+      notify!(lagger)
     end
   end
 
   def beats_existing_leader?
     leading_wpm < race_entry.wpm
+  end
+
+  def lagger
+    other_entries.first.user
   end
 
   def leading_wpm

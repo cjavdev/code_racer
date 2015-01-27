@@ -1,5 +1,8 @@
-<h1>EventMailer#surpassed</h1>
+<h1>Awe shucks!</h1>
 
-<p>
-  <%= @greeting %>, find me in app/views/event_mailer/surpassed.html.erb
-</p>
+<%= @leader.nickname %> beat your score on <%= @entry.race.track.title %>! 
+They got <%= @entry.wpm %>. I think you can better them! <%= link_to "WMP Challenge", root_url %>.
+
+<%= image_tag "iloveyou.gif" %>
+
+<%= link_to "Yo stop bugging me!", notification_url %>

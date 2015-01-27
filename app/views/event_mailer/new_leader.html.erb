@@ -1,5 +1,9 @@
-<h1>EventMailer#new_leader</h1>
+<h1>Awesome job!</h1>
 
 <p>
-  <%= @greeting %>, find me in app/views/event_mailer/new_leader.html.erb
+  You've taken the lead on <%= @entry.race.track.title %>! With <%= @entry.wpm %>!
 </p>
+
+<%= image_tag("excited.gif") %>
+
+<%= link_to "Yo stop bugging me!", notification_url %>

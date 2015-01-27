@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/welcome' => 'static_pages#welcome', as: :welcome
   get '/auth/:provider/callback' => 'sessions#create'
   resource :session, only: [:destroy]
+  resource :notification, only: [:show, :destroy]
 
   namespace :api, defaults: { format: :json } do
     resources :stats, only: [:index]
