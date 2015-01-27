@@ -6,7 +6,7 @@ class Instigator
   end
 
   def notify_new_champ!
-
+    TopEntryNotification.new(race_entry.user, other race_entry)
   end
 
   def notify_old_champ!
