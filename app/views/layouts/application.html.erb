@@ -18,10 +18,15 @@
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
           <%= link_to "cjavilla.com", "http://cjavilla.com" %>
+          <%= link_to "wpmchallenge.com", "http://wpmchallenge.com" %>
+          <%= link_to "wordspermintest.com", "http://wordspermintest.com" %>
+          <%= link_to "status203.me", "http://status203.me" %>
+          <%= link_to "ForkMe", "https://github.com/w1zeman1p/code_racer/fork" %>
+          <%= link_to "@w1zeman1p", "https://twitter.com/wizemanip" %>
+          <%= link_to "@wpmchallenge", "https://twitter.com/wpmchallenge" %>
           <% if current_user.try(:admin) %>
-            Users: <%= User.count %>; Race Entries: <%= RaceEntry.count %>
+            U: <%= User.count %>; E: <%= RaceEntry.count %>
           <% end %>
-          <%= link_to "@w1zeman1p", "https://twitter.com/wizemanip", class: "pull-right" %>
         </div>
       </div>
     </div>
