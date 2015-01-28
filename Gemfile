@@ -24,6 +24,10 @@ gem 'pusher_rails'
 gem 'serialize_json-rails'
 gem 'twitter'
 
+group :production do
+  gem 'dalli'
+end
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'

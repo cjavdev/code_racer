@@ -92,6 +92,7 @@ GEM
       sass-rails (<= 5.0.1)
       sprockets (< 2.13)
     daemons (1.1.9)
+    dalli (2.7.2)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
@@ -311,6 +312,7 @@ DEPENDENCIES
   byebug
   capybara
   compass-rails
+  dalli
   factory_girl_rails
   faker
   figaro
