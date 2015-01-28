@@ -1,8 +1,11 @@
 <h1>Awe shucks!</h1>
 
 <%= @leader.nickname %> beat your score on <%= @entry.race.track.title %>! 
-They got <%= @entry.wpm %>. I think you can better them! <%= link_to "WMP Challenge", root_url %>.
+They got <%= @entry.wpm %>. I think you can better them! <%= link_to "WPM Challenge", root_url %>.
 
-<%= image_tag "iloveyou.gif" %><br>
+<%= image_tag "iloveyou.gif" %>
+
+<br>
+<br>
 
 <%= link_to "Yo stop bugging me!", notification_url %>

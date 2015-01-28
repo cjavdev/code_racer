@@ -46,6 +46,8 @@ class Instigator
       .track
       .race_entries
       .where
+      .not(wpm: nil)
+      .where
       .not(id: race_entry.id)
       .order(wpm: :desc)
   end
