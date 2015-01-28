@@ -29,7 +29,9 @@ class Instigator
   end
 
   def lagger
-    other_entries.first.user
+    if other_entries.first.user != entry.user
+      other_entries.first.user
+    end
   end
 
   def leading_wpm
