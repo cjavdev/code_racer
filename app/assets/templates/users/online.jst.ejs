@@ -1,0 +1,7 @@
+<ul class="list-group">
+  <% users.each(function(user) { %>
+    <li class="list-group-item">
+      <%= user.escape("nickname") %>
+    </li>
+  <% }) %>
+</ul>

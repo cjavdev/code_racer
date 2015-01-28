@@ -15,6 +15,15 @@ window.CodeRacer = {
 
     $('#header').html(header.render().$el);
 
+    // Add the current user to the list of online users
+    CodeRacer.onlineUsers.add(new CodeRacer.Models.User(window.CURRENT_RACER));
+
+    $.ajax({
+      url: '/api/online_user',
+      type: 'POST',
+      data: window.CURRENT_RACER
+    });
+
     Backbone.history.start();
   }
 };
@@ -26,3 +35,19 @@ Pusher.log = function (message) {
 };
 
 CodeRacer.pusher = new Pusher('ec38d09303a657c3fd5e');
+CodeRacer.presence = CodeRacer.pusher.subscribe('presence');
+
+function cleanup() {
+  CodeRacer.pusher.disconnect();
+
+  $.ajax({
+    url: '/api/online_user',
+    type: 'DELETE',
+    data: window.CURRENT_RACER
+  });
+}
+
+$(window).on('beforeunload', function() {
+  var x = cleanup();
+  return x;
+});
