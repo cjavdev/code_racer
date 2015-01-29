@@ -32,7 +32,7 @@ window.CodeRacer = {
 
     CodeRacer.invites = new Backbone.Collection();
     CodeRacer.presence.bind('invite', function (data) {
-      if(data.id === window.CURRENT_RACER.id) {
+      if(data.id == window.CURRENT_RACER.id) {
         CodeRacer.invites.add(data);
       }
     });
