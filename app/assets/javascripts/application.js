@@ -17,6 +17,7 @@
 //= require moment
 //= require pusher
 //= require chart
+//= require bootstrap
 //= require serialize_json
 //= require code_racer
 //= require_tree ../templates

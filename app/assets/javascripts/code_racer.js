@@ -5,26 +5,37 @@ window.CodeRacer = {
   Views: {},
   Routers: {},
   initialize: function () {
-    var router = new CodeRacer.Routers.Router({
+    this.router = new CodeRacer.Routers.Router({
       $rootEl: $('#main')
     });
 
+    CodeRacer.setupPresence();
+    CodeRacer.installHeader();
+    Backbone.history.start();
+  },
+
+  installHeader: function () {
     var header = new CodeRacer.Views.Header({
-      router: router
+      router: this.router
     });
 
     $('#header').html(header.render().$el);
+  },
 
-    // Add the current user to the list of online users
+  setupPresence: function () {
     CodeRacer.onlineUsers.add(new CodeRacer.Models.User(window.CURRENT_RACER));
-
     $.ajax({
       url: '/api/online_user',
       type: 'POST',
       data: window.CURRENT_RACER
     });
 
-    Backbone.history.start();
+    CodeRacer.invites = new Backbone.Collection();
+    CodeRacer.presence.bind('invite', function (data) {
+      if(data.id === window.CURRENT_RACER.id) {
+        CodeRacer.invites.add(data);
+      }
+    });
   }
 };
 
@@ -39,7 +50,6 @@ CodeRacer.presence = CodeRacer.pusher.subscribe('presence');
 
 function cleanup() {
   CodeRacer.pusher.disconnect();
-
   $.ajax({
     url: '/api/online_user',
     type: 'DELETE',
@@ -47,7 +57,7 @@ function cleanup() {
   });
 }
 
-$(window).on('beforeunload', function() {
+$(window).on('beforeunload', function () {
   var x = cleanup();
   return x;
 });

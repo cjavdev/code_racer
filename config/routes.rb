@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resource :notification, only: [:show, :destroy]
 
   namespace :api, defaults: { format: :json } do
+    resources :invitations, only: [:create]
     resource :online_user, only: [:create, :destroy, :show]
     resource :setting, only: [:update]
     resources :stats, only: [:index]

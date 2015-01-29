@@ -13,6 +13,18 @@
       <li><a href="/#/staging">Invite Friends</a></li>
       <li><a href="/#/stats">Stats</a></li>
       <li><a href="/#/settings">Settings</a></li>
+      <% if(CodeRacer.invites.length > 0) { %>
+        <li class="dropdown">
+          <a href="#" class="danger dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            Someone wants to race! <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <% invites.each(function (invite) { %>
+              <li><a href="<%= invite.get('url') %>"><%= invite.escape('nickname') %></a></li>
+            <% }) %>
+          </ul>
+        </li>
+      <% } %>
     </ul>
     <form action="/session" class="navbar-form navbar-right" role="search" method="POST">
       <input type="hidden" name="_method" value="DELETE" />
