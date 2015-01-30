@@ -16,26 +16,10 @@ module Api
 
       unless @stage.racers.include?(current_user)
         @stage.racers << current_user
-        Pusher["stage_#{ params[:id] }"].trigger('add_racer', {
-          id: current_user.id,
-          nickname: current_user.nickname
-        })
       end
 
       render :show
     end
-
-    # def start
-    #   @registration = RaceRegistration.new(current_user, random_track)
-    #   @registration.save
-    #   @stage = Stage.find(params[:id])
-    #
-    #   Pusher["stage_#{ @stage.token }"].trigger('start_race', {
-    #     track_id: @registration.track.id
-    #   })
-    #
-    #   render json: { message: "Race started!" }
-    # end
 
     private
 

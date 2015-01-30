@@ -26,11 +26,7 @@ class RaceRegistration
   end
 
   def notify!
-    Pusher[race_channel].trigger('add_car', {
-      id: user.id,
-      nickname: user.nickname,
-      race_id: current_race.id
-    })
+    puts "Depricated"
   end
 
   def other_cars

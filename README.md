@@ -1,3 +1,3 @@
 # WPM Challenge
 
-Uses Pusher for multi-player typing race.
+Uses node service for multi-player typing race.

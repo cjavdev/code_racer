@@ -1,4 +1,4 @@
-/*globals window, Pusher, Backbone, CodeRacer, $, io */
+/*globals window, Backbone, CodeRacer, $, io */
 window.CodeRacer = {
   Models: {},
   Collections: {},
