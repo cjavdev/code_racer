@@ -17,7 +17,7 @@ RSpec.describe EventTweeter do
       expect(EventTweeter.sent_tweets.count).to eq(1)
       expect(EventTweeter.sent_tweets.first).to include("testnick")
       expect(EventTweeter.sent_tweets.first)
-        .to eq("/cc @testnick :( no way you typed 10.0 WPM. hit me up with the code and you'll get up here: goo.gl/YwTEh8")
+        .to eq("/cc @testnick :( no way you typed 10.0 #WPM. hit me up with the code and you'll get up here: goo.gl/YwTEh8")
     end
   end
 
@@ -29,7 +29,7 @@ RSpec.describe EventTweeter do
       expect(EventTweeter.sent_tweets.count).to eq(1)
       expect(EventTweeter.sent_tweets.first).to include("testnick")
       expect(EventTweeter.sent_tweets.first)
-        .to eq("/cc @testnick Awesome! #{ entry.wpm } WPM puts you at the top of #{ entry.race.track.title }")
+        .to eq("/cc @testnick Awesome! #{ entry.wpm } #WPM puts you at the top of #{ entry.race.track.title } http://goo.gl/hbwfvb")
     end
   end
 
@@ -42,7 +42,7 @@ RSpec.describe EventTweeter do
       expect(EventTweeter.sent_tweets.count).to eq(1)
       expect(EventTweeter.sent_tweets.first).to include("testnick")
       expect(EventTweeter.sent_tweets.first)
-        .to eq("/cc @testnick Awe dang! @newnick beat your score on #{ entry.race.track.title } /w #{ entry.wpm }. You can catch'em!")
+        .to eq("/cc @testnick Awe dang! @newnick beat your #WPM on #{ entry.race.track.title } /w #{ entry.wpm }. You can catch'em! http://goo.gl/hbwfvb")
     end
   end
 end

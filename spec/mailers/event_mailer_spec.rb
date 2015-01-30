@@ -2,10 +2,13 @@ require "rails_helper"
 
 RSpec.describe EventMailer, :type => :mailer do
   describe "new_leader" do
-    let(:mail) { EventMailer.new_leader }
+    let(:leader) { create(:user, nickname: 'leader') }
+    let(:lagger) { create(:user, nickname: 'lagger') }
+    let(:race_entry) { create(:race_entry, user: leader) }
+    let(:mail) { EventMailer.new_leader(leader, race_entry) }
 
     it "renders the headers" do
-      expect(mail.subject).to eq("New leader")
+      expect(mail.subject).to eq("leader Takes the lead!")
       expect(mail.to).to eq(["to@example.org"])
       expect(mail.from).to eq(["instigator@wpmchallenge.com"])
     end

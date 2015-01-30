@@ -1,7 +1,6 @@
 //= require jquery
 //= require underscore
 //= require backbone
-//= require pusher
 //= require code_racer
 //= require_tree ../../../app/assets/javascripts/models
 

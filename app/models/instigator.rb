@@ -29,7 +29,7 @@ class Instigator
   end
 
   def lagger
-    if other_entries.first.user != entry.user
+    if other_entries.first.user != race_entry.user
       other_entries.first.user
     end
   end
