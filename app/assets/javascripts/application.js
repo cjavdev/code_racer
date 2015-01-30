@@ -16,6 +16,7 @@
 //= require backbone
 //= require moment
 //= require pusher
+//= require socket.io-1.3.2
 //= require chart
 //= require bootstrap
 //= require serialize_json

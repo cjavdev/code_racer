@@ -31,6 +31,15 @@
       </div>
     </div>
   </footer>
+  <% if current_user %>
+    <script>
+     window.CURRENT_RACER = {
+       id: <%= current_user.id %>,
+       nickname: "<%= current_user.nickname %>"
+     };
+     window.SOCKET_PATH = "http://wpmchallengert.herokuapp.com";
+    </script>
+  <% end %>
 
   <%= javascript_include_tag 'application' %>
   <%= yield :scripts %>

@@ -42,15 +42,12 @@ CodeRacer.Models.Track = Backbone.Model.extend({
   },
 
   notify: function (wpm, percentComplete, over) {
-    $.ajax({
-      type: 'POST',
-      url: '/api/wpm',
-      data: {
-        id: this.car.id,
-        wpm: wpm,
-        percent_complete: percentComplete,
-        race_id: this.car.get('race_id')
-      }
+    console.log('notifying: ', this.speedUpdateKey());
+    CodeRacer.socket.emit(this.speedUpdateKey(), {
+      id: this.car.id,
+      wpm: wpm,
+      percent_complete: percentComplete,
+      race_id: this.car.get('race_id')
     });
 
     if (over) {
@@ -62,14 +59,37 @@ CodeRacer.Models.Track = Backbone.Model.extend({
     }
   },
 
+  addCar: function (car) {
+    console.log('Adding car');
+    this.cars().add(car);
+  },
+
+  updateSpeed: function (speed) {
+    console.log('speed update');
+    this.cars().get(speed.id).set('wpm', speed.wpm);
+    this.cars().get(speed.id).set('percent_complete', speed.percent_complete);
+  },
+
+  raceUpdate: function (data) {
+    console.log('Race update:', data);
+    this.cars().set(data);
+  },
+
   bindTrackEvents: function () {
-    this.channel.bind('add_car', function (otherCar) {
-      this.cars().add(otherCar);
-    }.bind(this));
-    this.channel.bind('update_speed', function (speed) {
-      this.cars().get(speed.id).set('wpm', speed.wpm);
-      this.cars().get(speed.id).set('percent_complete', speed.percent_complete);
-    }.bind(this));
+    CodeRacer.socket.on(this.speedUpdateKey(), this.updateSpeed.bind(this));
+    CodeRacer.socket.on(this.raceUpdateKey(), this.raceUpdate.bind(this));
+  },
+
+  raceUpdateKey: function () {
+    return 'race_' + this.raceId() + '_update';
+  },
+
+  speedUpdateKey: function () {
+    return 'update_' + this.raceId() + '_speed';
+  },
+
+  raceId: function () {
+    return this.car.get('race_id');
   },
 
   join: function (timer) {
@@ -78,9 +98,8 @@ CodeRacer.Models.Track = Backbone.Model.extend({
     });
     this.car.collection = this.cars();
     this.car.save().then(function () {
-      this.cars().add(this.car);
+      CodeRacer.socket.emit('add_car', this.car.toJSON());
       timer.startAt(new Date(this.car.get('start_at')));
-      this.channel = CodeRacer.pusher.subscribe('race_' + this.car.get('race_id'));
       this.bindTrackEvents();
     }.bind(this));
   },

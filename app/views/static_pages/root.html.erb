@@ -12,10 +12,6 @@
 
 <%= content_for :scripts do %>
 <script>
-  window.CURRENT_RACER = {
-    id: <%= current_user.id %>,
-    nickname: "<%= current_user.nickname %>"
-  };
   $(CodeRacer.initialize);
 </script>
 <% end %>

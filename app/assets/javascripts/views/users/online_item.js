@@ -1,21 +1,20 @@
+/*global CodeRacer, Backbone, $, window, JST */
 CodeRacer.Views.OnlineItem = Backbone.View.extend({
   template: JST['users/online_item'],
   tagName: "li",
   className: "list-group-item clearfix",
+
   events: {
     'click .invite': 'invite'
   },
 
   invite: function () {
     var stageUrl = $('.big-input').val();
-    $.ajax({
-      url: "/api/invitations",
-      type: "POST",
-      data: {
-        id: this.model.id,
-        url: stageUrl,
-        nickname: CURRENT_RACER.nickname
-      }
+
+    CodeRacer.socket.emit('invite', {
+      id: this.model.id,
+      url: stageUrl,
+      nickname: window.CURRENT_RACER.nickname
     });
   },
 

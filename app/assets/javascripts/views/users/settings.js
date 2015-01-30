@@ -1,3 +1,4 @@
+/*global CodeRacer, Backbone, JST */
 CodeRacer.Views.Settings = Backbone.View.extend({
   template: JST['users/settings'],
   tagName: "form",

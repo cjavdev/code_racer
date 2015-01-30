@@ -1,4 +1,4 @@
-/*globals window, Pusher, Backbone, CodeRacer, $ */
+/*globals window, Pusher, Backbone, CodeRacer, $, io */
 window.CodeRacer = {
   Models: {},
   Collections: {},
@@ -18,46 +18,23 @@ window.CodeRacer = {
     var header = new CodeRacer.Views.Header({
       router: this.router
     });
-
     $('#header').html(header.render().$el);
   },
 
   setupPresence: function () {
     CodeRacer.onlineUsers.add(new CodeRacer.Models.User(window.CURRENT_RACER));
-    $.ajax({
-      url: '/api/online_user',
-      type: 'POST',
-      data: window.CURRENT_RACER
-    });
-
     CodeRacer.invites = new Backbone.Collection();
-    CodeRacer.presence.bind('invite', function (data) {
-      if(data.id == window.CURRENT_RACER.id) {
+    CodeRacer.socket.on('invite', function (data) {
+      if (data.id == window.CURRENT_RACER.id) {
         CodeRacer.invites.add(data);
       }
     });
+    CodeRacer.socket.on('online_users', function (data) {
+      console.log('online users: ', data);
+      CodeRacer.onlineUsers.set(data);
+    });
+    CodeRacer.socket.emit('register', window.CURRENT_RACER);
   }
 };
 
-Pusher.log = function (message) {
-  if (window.console && window.console.log) {
-    window.console.log(message);
-  }
-};
-
-CodeRacer.pusher = new Pusher('ec38d09303a657c3fd5e');
-CodeRacer.presence = CodeRacer.pusher.subscribe('presence');
-
-function cleanup() {
-  CodeRacer.pusher.disconnect();
-  $.ajax({
-    url: '/api/online_user',
-    type: 'DELETE',
-    data: window.CURRENT_RACER
-  });
-}
-
-$(window).on('beforeunload', function () {
-  var x = cleanup();
-  return x;
-});
+CodeRacer.socket = io(window.SOCKET_PATH);

@@ -1,6 +1,7 @@
+/*global CodeRacer, Backbone, JST */
 CodeRacer.Views.Online = Backbone.View.extend({
   initialize: function () {
-    this.listenTo(this.collection, 'add', this.render);
+    this.listenTo(this.collection, 'add remove', this.render);
   },
 
   template: JST['users/online'],

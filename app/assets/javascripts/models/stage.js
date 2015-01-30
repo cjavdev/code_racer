@@ -7,20 +7,20 @@ CodeRacer.Models.Stage = Backbone.Model.extend({
   },
 
   startRace: function () {
-    $.ajax({
-      url: this.url() + '/start',
-      type: 'POST'
+    CodeRacer.socket.emit('start_race_' + this.get('token'), {
+      stage: this.get('token')
     });
   },
 
-  bindEvents: function () {
-    this.channel.bind('start_race', function (data) {
+  bindEvents: function (token) {
+    CodeRacer.socket.on('start_race_' + token, function (data) {
       Backbone.history.navigate("#track/" + data.track_id, {
         trigger: true
       });
     }.bind(this));
-    this.channel.bind('add_racer', function (data) {
-      this.racers().add(data);
+
+    CodeRacer.socket.on('update_stage_' + token, function (data) {
+      this.racers().set(data);
     }.bind(this));
   },
 
@@ -37,8 +37,16 @@ CodeRacer.Models.Stage = Backbone.Model.extend({
         parse: true
       });
     }
-    this.channel = CodeRacer.pusher.subscribe('stage_' + data.token);
-    this.bindEvents();
+
+    this.joinStage(data.token);
+    this.bindEvents(data.token);
     return data;
+  },
+
+  joinStage: function (token) {
+    var joinData = _.extend({
+      token: token
+    }, window.CURRENT_RACER);
+    CodeRacer.socket.emit('join_stage', joinData);
   },
 });

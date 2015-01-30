@@ -1,6 +1,7 @@
+/*global CodeRacer, Backbone */
 CodeRacer.Collections.Tracks = Backbone.Collection.extend({
+  model: CodeRacer.Models.Track,
   url: '/api/tracks',
-  model: CodeRacer.Models.Track
 });
 
 CodeRacer.tracks = new CodeRacer.Collections.Tracks();

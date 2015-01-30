@@ -15,7 +15,6 @@ Rails.application.routes.draw do
       resources :leaders, only: [:index]
     end
     resources :race_entries, only: [:create, :update]
-    resource :wpm, only: [:create]
     resources :stages, only: [:create, :show] do
       member do
         post '/start' => 'stages#start'
