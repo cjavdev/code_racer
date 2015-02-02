@@ -8,7 +8,7 @@ class RaceRegistration
 
   def save
     create_race! unless track.current_race
-    track.current_race.join(user)
+    track.current_race.join(user) unless user.guest?
   end
 
   def errors

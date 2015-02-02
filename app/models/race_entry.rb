@@ -16,6 +16,7 @@ class RaceEntry < ActiveRecord::Base
   validate :no_cheating_wpm
   belongs_to :race
   belongs_to :user
+  scope :finished, -> { where.not(wpm: nil) }
 
   def no_cheating_wpm
     return true if wpm.nil? || wpm.between?(1, 255)

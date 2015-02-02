@@ -17,4 +17,8 @@ class Stage < ActiveRecord::Base
   before_validation do
     self.token ||= SecureRandom.hex(6)
   end
+
+  def racer_array
+    @racer_array ||= racers.to_a
+  end
 end

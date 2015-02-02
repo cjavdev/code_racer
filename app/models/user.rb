@@ -25,6 +25,27 @@ class User < ActiveRecord::Base
     self.session_token ||= SecureRandom.hex
   end
 
+  def picture
+    if provider == "facebook"
+      "http://graph.facebook.com/#{ uid }/picture?type=square"
+    elsif provider == "github"
+      "https://avatars3.githubusercontent.com/u/#{ uid }?v=3&s=460"
+    elsif provider == "twitter"
+      "/assets/snail.jpg"
+    end
+  end
+
+  def average_wpm
+    race_entries
+      .finished
+      .select('AVG(wpm) avg_wpm')
+      .group('user_id')
+      .to_a
+      .first
+      .avg_wpm
+      .round(2)
+  end
+
   def stats
     race_entries
       .where
@@ -69,5 +90,9 @@ class User < ActiveRecord::Base
     self.session_token = SecureRandom.hex
     save!
     session_token
+  end
+
+  def guest?
+    false
   end
 end

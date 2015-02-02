@@ -17,7 +17,7 @@
   <footer class="footer">
     <div class="container">
       <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8 col-md-offset-2 center-text">
           <%= link_to "cjavilla.com", "http://cjavilla.com" %>
           <%= link_to "wpmchallenge.com", "http://wpmchallenge.com" %>
           <%= link_to "status203.me", "http://status203.me" %>
@@ -35,7 +35,10 @@
     <script>
       window.CURRENT_RACER = {
         id: <%= current_user.id %>,
-        nickname: "<%= current_user.nickname %>"
+        nickname: "<%= current_user.nickname %>",
+        guest: <%= current_user.guest? %>,
+        wpm: <%= current_user.average_wpm %>,
+        picture: "<%= current_user.picture %>"
       };
       window.SOCKET_PATH = "<%= ENV["SOCKET_BASE"] %>";
     </script>

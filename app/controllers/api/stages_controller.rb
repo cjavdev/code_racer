@@ -4,7 +4,11 @@ module Api
       @stage = current_user.stages.new
 
       if @stage.save
-        @stage.racers << current_user
+        if current_user.guest?
+          @stage.racer_array << current_user
+        else
+          @stage.racers << current_user
+        end
         render :show
       else
         render json: @stage.errors.full_messages, status: 422
@@ -15,7 +19,11 @@ module Api
       @stage = Stage.find_by(token: params[:id])
 
       unless @stage.racers.include?(current_user)
-        @stage.racers << current_user
+        if current_user.guest?
+          @stage.racer_array << current_user
+        else
+          @stage.racers << current_user
+        end
       end
 
       render :show

@@ -9,11 +9,13 @@
     <a class="navbar-brand" href="#">WPM Challenge</a>
   </div>
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="navbar-left nav navbar-nav">
-      <li><a href="/#/staging">Invite Friends</a></li>
-      <li><a href="/#/stats">Stats</a></li>
-      <li><a href="/#/settings">Settings</a></li>
-    </ul>
+    <% if(!window.CURRENT_RACER.guest) { %>
+      <ul class="navbar-left nav navbar-nav">
+        <li><a href="/#/staging"><i class="fa fa-users"></i> Invite Friends</a></li>
+        <li><a href="/#/stats"><i class="fa fa-line-chart"></i> Stats</a></li>
+        <li><a href="/#/settings"><i class="fa fa-cog"></i> Settings</a></li>
+      </ul>
+    <% } %>
     <form action="/session" class="navbar-form navbar-right" role="search" method="POST">
       <input type="hidden" name="_method" value="DELETE" />
       <button type="submit" class="btn btn-info">
@@ -34,6 +36,5 @@
         </li>
       </ul>
     <% } %>
-
   </div>
 </div>
