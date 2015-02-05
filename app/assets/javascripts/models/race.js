@@ -10,8 +10,14 @@ CodeRacer.Models.Race = function (track, timer, wordChecker) {
   });
   this.forwardEvents();
 
-  track.fetch();
-  track.join(timer);
+  if(track.id == 0) {
+    track.fetch().then(function () {
+      track.join(timer);
+    });
+  } else {
+    track.fetch();
+    track.join(timer);
+  }
 };
 
 CodeRacer.Models.Race.prototype = {
