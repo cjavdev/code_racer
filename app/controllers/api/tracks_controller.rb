@@ -7,7 +7,11 @@ module Api
     end
 
     def show
-      @track = Track.includes(race_entries: :user).find(params[:id])
+      if params[:id] == "0"
+        @track = Track.includes(race_entries: :user).random
+      else
+        @track = Track.includes(race_entries: :user).find(params[:id])
+      end
     end
 
     def create

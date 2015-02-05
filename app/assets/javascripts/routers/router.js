@@ -12,7 +12,25 @@ CodeRacer.Routers.Router = Backbone.Router.extend({
     'track/:id/edit': 'edit',
     'staging(/:token)': 'staging',
     'stats': 'stats',
-    'settings': 'settings'
+    'settings': 'settings',
+    'surprise': 'surprise'
+  },
+
+  surprise: function () {
+    var track = new CodeRacer.Models.Track({
+      id: 0
+    });
+
+    var timer = new CodeRacer.Models.Timer();
+    var wordChecker = new CodeRacer.Models.WordChecker();
+    var race = new CodeRacer.Models.Race(track, timer, wordChecker);
+
+    var view = new CodeRacer.Views.TrackDetail({
+      model: track,
+      race: race
+    });
+
+    this._swapView(view);
   },
 
   settings: function () {
