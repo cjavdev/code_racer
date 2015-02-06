@@ -36,13 +36,13 @@ class User < ActiveRecord::Base
   end
 
   def average_wpm
-    race_entries
+    (race_entries
       .finished
       .select('AVG(wpm) avg_wpm')
       .group('user_id')
       .to_a
       .first
-      .try(:avg_wpm, 0)
+      .try(:avg_wpm) || 0)
       .round(2)
   end
 
