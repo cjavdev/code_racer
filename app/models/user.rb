@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
       .group('user_id')
       .to_a
       .first
-      .avg_wpm
+      .try(:avg_wpm, 0)
       .round(2)
   end
 
