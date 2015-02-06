@@ -48,4 +48,19 @@ RSpec.describe User, :type => :model do
       expect(u.reset_session_token!).not_to eq(old_token)
     end
   end
+
+  describe '#average_wpm' do
+    it 'returns 0 if you have no race_entries' do
+      u = build(:user)
+      expect(u.average_wpm).to eq(0)
+    end
+
+    it 'returns the average of the wpms from the race entries of a user' do
+      u = create(:user)
+      create(:race_entry, user: u, wpm: 10)
+      create(:race_entry, user: u, wpm: 20)
+      create(:race_entry, wpm: 10)
+      expect(u.average_wpm).to eq(15.00)
+    end
+  end
 end
