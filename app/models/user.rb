@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
     when "github"
       u = User.create!(
         uid: auth_hash.fetch(:uid),
-        email: auth_hash.fetch(:info).fetch(:email),
+        email: auth_hash.fetch(:info)[:email] || "noemail@noemail.com",
         name: auth_hash.fetch(:info).fetch(:name),
         nickname: auth_hash.fetch(:info).fetch(:nickname),
         provider: provider
