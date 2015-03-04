@@ -9,7 +9,7 @@
 #
 
 class Race < ActiveRecord::Base
-  DELAY = 15
+  DELAY = 9
   belongs_to :track
   has_many :race_entries
   scope :open_for_registration, -> { where('created_at > ?', DELAY.seconds.ago) }
